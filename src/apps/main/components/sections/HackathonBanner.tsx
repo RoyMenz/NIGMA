@@ -18,7 +18,7 @@ const HackathonBanner: React.FC = () => {
             <div className="absolute bottom-10 right-10 opacity-10 pointer-events-none hidden lg:block">
               <span className="material-symbols-outlined !text-9xl text-primary">military_tech</span>
             </div>
-
+            
             {/* Content */}
             <div className="flex flex-col gap-4 text-center max-w-[700px] z-10">
               <div className="flex justify-center mb-2">
@@ -27,7 +27,7 @@ const HackathonBanner: React.FC = () => {
                 </span>
               </div>
               <h1 className="text-foreground text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black leading-tight tracking-[-0.033em] uppercase px-2">
-                The <span className="text-primary">Golden</span> Hackathon
+               <span className="text-primary">Ragnarcode</span>
               </h1>
               <h2 className="text-foreground/80 text-base font-medium leading-relaxed md:text-xl px-4">
                 20 Hours of Immortal Creation. Forge your legacy in code. Assemble your pantheon of
@@ -47,7 +47,7 @@ const HackathonBanner: React.FC = () => {
               </div>
               <div className="flex min-w-[140px] sm:min-w-[160px] md:min-w-[180px] flex-1 flex-col items-center gap-2 rounded-lg sm:rounded-xl p-4 sm:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm">
                 <p className="text-foreground/60 text-xs font-bold uppercase tracking-tighter">Battalions</p>
-                <p className="text-primary tracking-tight text-3xl font-black leading-tight">4 Members</p>
+                <p className="text-primary tracking-tight text-3xl font-black leading-tight">2-4 Members</p>
               </div>
             </div>
 
@@ -55,14 +55,14 @@ const HackathonBanner: React.FC = () => {
             <div className="flex flex-col items-center gap-6 mt-4 z-10">
               <button className="group flex w-full sm:w-auto min-w-0 sm:min-w-[280px] max-w-[320px] sm:max-w-none cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 sm:h-16 px-6 sm:px-8 bg-primary text-background-dark text-base sm:text-lg font-black uppercase tracking-[0.1em] hover:bg-foreground transition-all shadow-xl">
                 <span className="flex items-center gap-3">
-                  Claim Your Throne
+                  COMING SOON
                   <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
                     arrow_forward
                   </span>
                 </span>
               </button>
               <p className="text-white/40 text-[10px] uppercase font-bold tracking-widest italic">
-                Entry is limited to the first 50 teams who qualify.
+          
               </p>
             </div>
           </div>

@@ -2,12 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { getTeamSize } from '../data/eventDetails';
 import './EventDetailModal.css';
 
-interface EventPhase {
-  number: string;
-  title: string;
-  description: string;
-}
-
 interface EventDetail {
   id: number;
   title: string;
@@ -16,7 +10,6 @@ interface EventDetail {
   icon: string;
   teamSize?: number;
   rules: string[];
-  phases: EventPhase[];
   registrationDeadline?: string;
 }
 
@@ -536,23 +529,6 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                     </li>
                   ))}
                 </ul>
-              </div>
-
-              {/* Warrior's Guide Section */}
-              <div className="scroll-section">
-                <div className="scroll-section-header">
-                  <span className="material-symbols-outlined">map</span>
-                  <h2>Warrior's Guide</h2>
-                </div>
-                <div className="scroll-phases">
-                  {event.phases.map((phase, index) => (
-                    <div key={index} className="phase-card">
-                      <div className="phase-number">Phase {phase.number}</div>
-                      <div className="phase-title">{phase.title}</div>
-                      <p className="phase-description">{phase.description}</p>
-                    </div>
-                  ))}
-                </div>
               </div>
 
               {/* Prize Badge removed per data model change */}

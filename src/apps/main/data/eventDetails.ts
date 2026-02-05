@@ -1,11 +1,5 @@
 // Event Details Data
 
-export interface EventPhase {
-  number: string;
-  title: string;
-  description: string;
-}
-
 export interface EventDetail {
   id: number;
   title: string;
@@ -19,7 +13,6 @@ export interface EventDetail {
   teamSizeMin?: number;
   teamSizeMax?: number;
   rules: string[];
-  phases: EventPhase[];
   registrationDeadline?: string;
 }
 
@@ -48,10 +41,17 @@ export const eventDetails: EventDetail[] = [
     icon: 'grade',
     heads: ['Vishak', 'Santhosh'],
     teamSize: 1,
-    rules: ['Solo event', 'Round-based case studies and live presentations'],
-    phases: [
-      { number: 'I', title: 'Prelims', description: 'Online case submission' },
-      { number: 'II', title: 'Finals', description: 'On-site presentations and Q&A' }
+    rules: [
+      'Entry Fees : ₹ 150 per participant(On-site payment).',
+      'Every college has only one participant each.',
+      'Participants must wear formal attire with a blazer.',
+      'Rounds will be disclosed on the spot.',
+      'No participant replacements are allowed after registration.',
+      'Participants must carry their own laptop.',
+      'Arguments with the judges will not be entertained.',
+      'Use of unfair means, plagiarism, or external assistance is strictly prohibited.',
+      'Participants must maintain professional behavior throughout the event.',
+      'Any form of misbehavior or misconduct will lead to immediate disqualification.'
     ]
   },
   {
@@ -62,8 +62,14 @@ export const eventDetails: EventDetail[] = [
     icon: 'attach_money',
     heads: ['Prarthana', 'Bharath'],
     teamSize: 2,
-    rules: ['Teams of 2', 'No external assistance during live rounds'],
-    phases: [{ number: 'I', title: 'Simulation', description: 'Live trading rounds' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Two make a team.',
+      'The rounds and rules will be explained on the spot.',
+      'After registration, the replacement of any participant is not allowed.',
+      'Participants must carry their own smartphone with good network connection for internet access.',
+      'Participants must bring their own calculator.'
+    ]
   },
   {
     id: 3,
@@ -73,8 +79,14 @@ export const eventDetails: EventDetail[] = [
     icon: 'campaign',
     heads: ['Prapthi', 'Ayshal'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Creative campaign deliverables required'],
-    phases: [{ number: 'I', title: 'Campaign Brief', description: 'Deliverables and presentation' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team.',
+      'Each team shall consist of Two participants(On-site payment).',
+      'Participants are required to bring their own Laptops.',
+      'Borrowing devices from other teams is strictly prohibited.',
+      'The event will be conducted in multiple rounds.',
+      'Use of mobile phones/internet or any misconduct will lead to disqualification.'
+    ]
   },
   {
     id: 4,
@@ -84,8 +96,18 @@ export const eventDetails: EventDetail[] = [
     icon: 'group',
     heads: ['Pavani', 'Sudeeksha'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Role-play and case study rounds'],
-    phases: [{ number: 'I', title: 'Role Play', description: 'Live HR scenarios' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Two make a team.',
+      'Participants must carry a valid college ID.',
+      'Registration is Compulsory.',
+      'The event consists of multiple rounds. Rules relating to rounds will be informed on the spot.',
+      'Participants must report 15 minutes before the schedule.',
+      'Judges and organizers decisions will be final.',
+      'Any form of misbehaviour or indiscipline will lead to disqualification.',
+      'Dress Code: Formal or business casual.',
+      'Strict time limit will be followed for each round.'
+    ]
   },
   {
     id: 5,
@@ -95,8 +117,17 @@ export const eventDetails: EventDetail[] = [
     icon: 'event',
     heads: ['Rishika', 'Viola'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Presentation of event plan and budget'],
-    phases: [{ number: 'I', title: 'Plan', description: 'Submit event plan' }, { number: 'II', title: 'Execute', description: 'On-site mock execution' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Two make a team.',
+      'The event will have multiple rounds focusing on creativity, crisis handling, planning and presentation.',
+      'Rules relating to the rounds and topics shall be informed on the spot.',
+      'Participants must clarify their doubts before the competition starts.',
+      'After the registration, replacement of any participant is not allowed.',
+      'Misconduct or arguments with judges will lead to disqualification.',
+      'Participants are required to bring the necessary electronic devices.',
+      'Judges decision is final.'
+    ]
   },
 
   // IT / Technical events (displayed second)
@@ -108,8 +139,13 @@ export const eventDetails: EventDetail[] = [
     icon: 'code',
     heads: ['Leesha', 'Lavisha'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Online preliminary followed by on-site finals'],
-    phases: [{ number: 'I', title: 'Online Quals', description: 'Algorithmic problem set' }, { number: 'II', title: 'Finals', description: 'On-site coding showdown' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Two make a team.',
+      'Participants must have basic knowledge of programming languages like (C, C++, Java, Python).',
+      'Any kind of malpractices will lead to disqualification of the team.',
+      'All the rounds and their rules will be disclosed just before the competition.'
+    ]
   },
   {
     id: 7,
@@ -119,8 +155,15 @@ export const eventDetails: EventDetail[] = [
     icon: 'sports_esports',
     heads: ['Vikas', 'Adithya Shenoy'],
     teamSize: 4,
-    rules: ['Teams of 4', 'Fair-play required'],
-    phases: [{ number: 'I', title: 'Online Quals', description: 'Determine top teams' }, { number: 'II', title: 'On-site Bracket', description: 'Elimination rounds' }]
+    rules: [
+      'Entry Fees : ₹ 300 per team(On-site payment).',
+      'Squad entry only with exactly four players per team. TPP mode only. Players are requested to download all the maps in advance.',
+      'Tournament will be conducted in league format. Winners and runners-up will be decided based on total points from all matches.',
+      'Only mobile phones are allowed. Emulators, tablets, iPads, or external devices are strictly prohibited.',
+      'No hacking, cheating, or teaming up with other squads. Any violation will result in immediate disqualification of the entire team. Organisers can check devices.',
+      'All players must be present inside the venue at least 15 minutes before match time. Late entry is not allowed.',
+      'Respect towards players, volunteers, and organizers is mandatory. Organizer\'s decision will be final and binding.'
+    ]
   },
   {
     id: 8,
@@ -130,8 +173,15 @@ export const eventDetails: EventDetail[] = [
     icon: 'search',
     heads: ['Sudeeksha', 'Manisha'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Follow event marshals and safety rules'],
-    phases: [{ number: 'I', title: 'Hunt', description: 'Timed treasure hunt across campus' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Number of participants for the event will be 2 per team.',
+      'The decision of the event coordinators will be final and shall not be subjected to any change.',
+      'The event will unfold in multiple stages leading to the final treasure.',
+      'Participants are not allowed to use mobiles or electronic devices unless specified.',
+      'Replacement of any participant of a team is not allowed after registration.',
+      'Teams using unfair means will face disqualification.'
+    ]
   },
   {
     id: 9,
@@ -140,9 +190,17 @@ export const eventDetails: EventDetail[] = [
     quote: 'From logic puzzles to number theory — endurance matters.',
     icon: 'calculate',
     heads: ['Clanita', 'Shruthi'],
-    teamSize: 4,
-    rules: ['Teams of 4', 'Multiple timed rounds'],
-    phases: [{ number: 'I', title: 'Seven Rounds', description: 'Each round focuses on a different math domain' }]
+    teamSize: 2,
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Each team must have 2 participants.',
+      'The event consists of 7 rounds, each testing different mathematical and logical skills.',
+      'Rules and instructions for each round will be explained on the spot.',
+      'No replacement of participants after the registration.',
+      'Participants must clarify their doubts before the competition starts.',
+      'Arguments or disputes with judges are strictly not allowed.',
+      'Any form of misconduct or unfair practices will result in disqualification.'
+    ]
   },
   {
     id: 10,
@@ -154,8 +212,22 @@ export const eventDetails: EventDetail[] = [
     teamSize: 4,
     teamSizeMin: 2,
     teamSizeMax: 4,
-    rules: ['Teams of up to 4', '24-48 hour build window depending on track'],
-    phases: [{ number: 'I', title: 'Sprint', description: 'Hack for the allotted time' }, { number: 'II', title: 'Demo', description: 'Pitch to judges' }]
+    rules: [
+      'The hackathon will be conducted over a continuous duration of 20 hours.',
+      'Entry Fees : ₹ 350 per head, payable only by 15 teams shortlisted for the final round.',
+      'The event will be held in two phases: Round 1 (Online Ideation Round) and Round 2 (Onsite Final Round).',
+      'Only currently enrolled BCA, Bsc and MCA students are eligible to participate.',
+      'Teams must consist of 2 to 4 members, and all members must belong to the same college.',
+      'Team composition cannot be changed after registration.',
+      'For Round 1, teams must submit an idea presentation (PPT) based on one of the four provided tracks.',
+      'Based on the evaluation, the top 15 teams will be shortlisted for the onsite finals.',
+      'In the final round, problem statements will be announced on the spot.',
+      'All solutions must be designed and developed strictly during the hackathon duration.',
+      'Use of pre-built or previously developed projects is strictly prohibited.',
+      'If any third-party libraries, tools, APIs, or code are used, proper credits must be clearly mentioned.',
+      'Plagiarism or failure to provide appropriate credits will result in immediate disqualification.',
+      'The decisions of the judges and organizing committee shall be final and binding.'
+    ]
   },
 
   // Other / Cultural events (displayed last)
@@ -169,8 +241,26 @@ export const eventDetails: EventDetail[] = [
     teamSize: 17,
     teamSizeMin: 10,
     teamSizeMax: 17,
-    rules: ['Solo or groups allowed', 'Time limits apply'],
-    phases: [{ number: 'I', title: 'Auditions', description: 'Select finalists' }, { number: 'II', title: 'Showcase', description: 'Final performances' }]
+    rules: [
+      'Entry Fees : ₹ 600 per team(On-site payment).',
+      'All performances must strictly follow the theme: "ಕಾಲಯಾನ (Kaalayaana) – The Journey Through Time" (Ancient → Medieval → Present → Future)',
+      'Each team must clearly show transitions between different time periods in their performance.',
+      'Team Size: 15 + 2 participants. Maximum of 15 participants, Minimum of 8 participants per team, Plus 2 members for backstage support only.',
+      'Time Limit: 15 + 2 minutes. 15 minutes for performance. 2 minutes strictly for stage set-up. No performance is allowed during the set-up time.',
+      'Exceeding the time limit may lead to negative marking.',
+      'Performance Types Allowed: Dance, Singing, Skit, Mime, Drama, Fashion Walk, Fusion Acts, and other creative forms.',
+      'Costumes, props, and music must match the selected era(s) and support the theme.',
+      'Vulgarity, offensive gestures, or inappropriate content is strictly prohibited.',
+      'Performances must respect all cultures, traditions, and communities.',
+      'Audio tracks must be submitted in MP3 format before the event.',
+      'LED screen facility is available and teams are free to use it.',
+      'Teams must report at least 30 minutes prior to their performance time.',
+      'Participants must handle props carefully. Any damage to the stage or college property will be the team\'s responsibility.',
+      'Use of dangerous materials such as fire, sharp objects, liquids, or heavy props is strictly prohibited.',
+      'The judges\' decision will be final and binding.',
+      'Late entries and violation of rules may result in negative marking or disqualification.',
+      'The Organizing Committee reserves the right to make necessary changes for the smooth conduct of the event.'
+    ]
   },
   {
     id: 12,
@@ -180,8 +270,15 @@ export const eventDetails: EventDetail[] = [
     icon: 'newspaper',
     heads: ['Trisha', 'Pranamya'],
     teamSize: 1,
-    rules: ['Solo event', 'Submission of press materials required'],
-    phases: [{ number: 'I', title: 'Brief', description: 'Create press material and handle live Q&A' }]
+    rules: [
+      'Entry Fees : ₹ 100 per participant(On-site payment).',
+      'Individual participation.',
+      'The participant can choose a particular personality for the first round, rules for the second round will be disclosed later.',
+      'Languages that can be used are English, Hindi, Kannada and Tulu (Obscene words and flaring comments are strictly prohibited).',
+      'Before the event, participants must give the required information about their personality to the event head.',
+      'Participants must wear the costumes and use music suitable to the character.',
+      'Argument with the judges will lead to disqualification of the participant.'
+    ]
   },
   {
     id: 13,
@@ -191,8 +288,19 @@ export const eventDetails: EventDetail[] = [
     icon: 'recycling',
     heads: ['Riya', 'Shreya'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Materials should be largely recycled'],
-    phases: [{ number: 'I', title: 'Create', description: 'On-site build and presentation' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Each team must consist of 2 members.',
+      'Time limit: 2 hours.',
+      'There will be only one round.',
+      'Participants must bring their own waste materials (maximum 5 items can be prepared).',
+      'Only used/waste materials are allowed; no new or decorative items.',
+      'Basic stationery is allowed and not counted as waste.',
+      'Only hot glue gun is permitted; no other electrical items allowed.',
+      'Judging will be based on creativity, use of waste, and presentation.',
+      'The judges decision is final.',
+      'No replacement of participants after registration.'
+    ]
   },
   {
     id: 14,
@@ -202,8 +310,14 @@ export const eventDetails: EventDetail[] = [
     icon: 'movie',
     heads: ['Manish', 'Dhanush'],
     teamSize: 1,
-    rules: ['Solo', 'Original content only'],
-    phases: [{ number: 'I', title: 'Submission', description: 'Upload your reel' }, { number: 'II', title: 'Screening', description: 'Final judging' }]
+    rules: [
+      'Entry Fees : ₹ 100 per participant(On-site payment).',
+      'Individual participation.',
+      'Both mobile phones and DSLR cameras are allowed.',
+      'Reel must be a maximum of 1 minute 30 sec in duration.',
+      'The topic will be provided on the spot.',
+      'No Plagiarism.'
+    ]
   },
   {
     id: 15,
@@ -213,7 +327,18 @@ export const eventDetails: EventDetail[] = [
     icon: 'brush',
     heads: ['Akshay N', 'Prajna'],
     teamSize: 2,
-    rules: ['Teams of 2', 'Hygiene and safety rules apply'],
-    phases: [{ number: 'I', title: 'Live Paint', description: 'Timed face-painting round' }]
+    rules: [
+      'Entry Fees : ₹ 150 per team(On-site payment).',
+      'Each team must have two participants: one painter and one model.',
+      'The time limit is 60 minutes.',
+      'Participants must report 15 minutes before the event starts.',
+      'The theme will be announced 30 minutes before the event and must be followed.',
+      'Only skin-safe face paints and brushes are allowed.',
+      'Painting must be done only on the face.',
+      'Participants must bring their own materials.',
+      'No change of team members is allowed after registration.',
+      'No outside help or mobile phone usage is allowed during the event.',
+      'The judges and organisers decision will be final.'
+    ]
   }
 ];

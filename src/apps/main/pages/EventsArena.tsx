@@ -168,7 +168,7 @@ const EventsArena: React.FC = () => {
                 disabled={event.id === 10}
                 title={event.id === 10 ? 'Registration disabled — Hackathon page coming soon' : 'View details'}
               >
-                <span>{event.id === 10 ? 'Register (Disabled)' : 'View Scroll'}</span>
+                <span>{event.id === 10 ? 'Coming soon' : 'View Scroll'}</span>
                 <span className="material-symbols-outlined">auto_stories</span>
               </button>
             </div>
@@ -177,7 +177,7 @@ const EventsArena: React.FC = () => {
 
         {/* Footer */}
         <footer className="arena-footer">
-          <div className="arena-footer-content">
+          {/* <div className="arena-footer-content">
             <div className="arena-footer-links">
               <a href="#rules">Book of Rules</a>
               <span className="arena-footer-divider">•</span>
@@ -193,8 +193,8 @@ const EventsArena: React.FC = () => {
                 <span className="material-symbols-outlined">public</span>
               </div>
             </div>
-          </div>
-          <p className="arena-footer-text">Ragnarok © 2064 • Powered by the Forge of Asgard</p>
+          </div> */}
+          <p className="arena-footer-text">Ragnarok © 2026 • Powered by the Forge of Asgard</p>
         </footer>
       </main>
 

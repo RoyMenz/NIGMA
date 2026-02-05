@@ -53,7 +53,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ targetDate }) => {
   };
 
   return (
-    <section className="py-8 sm:py-12 countdown-ice-bg">
+    <section className="py-8 sm:py-12 mb-12 sm:mb-16 countdown-ice-bg">
       <div className="mx-auto max-w-[960px] px-4 sm:px-6">
         <div className="flex flex-col items-center gap-4 sm:gap-6">
           <h3 className="text-primary text-xs sm:text-sm font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-center">
