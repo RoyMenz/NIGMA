@@ -58,10 +58,13 @@ const VARIETY_TEAM_OPTIONS = Array.from(
   (_, i) => VARIETY_TEAM_MIN + i
 );
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
+
 const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onClose }) => {
   const [showRegistration, setShowRegistration] = React.useState(false);
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [isFlipping, setIsFlipping] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [members, setMembers] = React.useState<RegistrationMember[]>([
     { fullName: '', college: '', cityState: '', phone: '' },
   ]);
@@ -115,8 +118,9 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
     setCurrentMemberIndex(0);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     const effectiveSize = Math.max(1, effectiveTeamSize);
     const isLastMember = currentMemberIndex >= effectiveSize - 1;
 
@@ -125,12 +129,40 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
       return;
     }
 
-    setIsFlipping(true);
-    setTimeout(() => {
-      setShowRegistration(false);
-      setShowSuccess(true);
-      setIsFlipping(false);
-    }, 300);
+    if (!event) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${API_BASE}/api/registrations`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventId: event.id,
+          members,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json().catch(() => null);
+        throw new Error(
+          errorBody?.error?.message ??
+            `Registration failed with status ${response.status}`,
+        );
+      }
+
+      setIsFlipping(true);
+      setTimeout(() => {
+        setShowRegistration(false);
+        setShowSuccess(true);
+        setIsFlipping(false);
+      }, 300);
+    } catch (err) {
+      // Keep UI unchanged; log for debugging.
+      // eslint-disable-next-line no-console
+      console.error(err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {

@@ -14,9 +14,20 @@ export function createApp() {
 
   app.disable('x-powered-by');
   app.use(helmet());
+  const allowedOrigins = env.CORS_ORIGIN.split(',')
+    .map((o) => o.trim())
+    .filter(Boolean);
+  // eslint-disable-next-line no-console
+  console.log('[cors] allowed origins:', allowedOrigins);
+
   app.use(
     cors({
-      origin: env.CORS_ORIGIN,
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) return callback(null, true);
+        if (env.NODE_ENV !== 'production') return callback(null, true);
+        return callback(new Error('Not allowed by CORS'));
+      },
     }),
   );
   app.use(express.json({ limit: '256kb' }));
