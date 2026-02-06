@@ -160,6 +160,10 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  .arena-logo img {
+    height: 3.625rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -177,8 +181,8 @@
   }
 
   .arena-logo img {
-    height: 3rem;
-    max-width: 140px;
+    height: 3.75rem;
+    max-width: 200px;
   }
 
   .arena-register-btn {
@@ -195,8 +199,8 @@
   }
 
   .arena-logo img {
-    height: 2.75rem;
-    max-width: 130px;
+    height: 3.25rem;
+    max-width: 170px;
   }
 
   .arena-register-btn {

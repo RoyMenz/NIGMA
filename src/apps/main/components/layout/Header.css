@@ -80,15 +80,15 @@
 
 @media (max-width: 768px) {
   .landing-logo img {
-    height: 3.5rem;
-    max-width: 160px;
+    height: 4.25rem;
+    max-width: 220px;
   }
 }
 
 @media (max-width: 480px) {
   .landing-logo img {
-    height: 3rem;
-    max-width: 140px;
+    height: 3.75rem;
+    max-width: 190px;
   }
 }
 

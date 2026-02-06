@@ -94,7 +94,7 @@ const EventsArena: React.FC = () => {
             <img 
               src={headerLogo} 
               alt="NITTE Logo" 
-              className="h-[58px] w-auto object-contain"
+              className="w-auto object-contain"
             />
           </div>
           <div className="arena-nav-right">
