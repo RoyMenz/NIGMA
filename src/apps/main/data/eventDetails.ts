@@ -90,7 +90,7 @@ export const eventDetails: EventDetail[] = [
   },
   {
     id: 4,
-    title: 'HR',
+    title: 'Human Resource',
     description: 'Human Resources challenge & role plays.',
     quote: 'Test your people skills and organisational judgment.',
     icon: 'group',
