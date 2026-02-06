@@ -33,7 +33,11 @@ const Hero: React.FC = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 hero-actions mt-[8px] w-full max-w-[600px]">
-            <button className="flex min-w-0 w-full sm:w-auto sm:min-w-[200px] max-w-full sm:max-w-none cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 sm:h-14 px-6 sm:px-8 bg-primary text-background-dark text-base sm:text-lg font-black uppercase tracking-wider transition-all hover:shadow-[0_0_20px_rgba(201,162,77,0.5)] hover:scale-105 active:scale-95">
+            <button 
+            onClick={() => window.open(
+              'https://drive.google.com/file/d/1n8_FeR5NT7sD-TCJ-j4GT2J_cseUV3TR/view?usp=drivesdk',
+              '_blank')}
+            className="flex min-w-0 w-full sm:w-auto sm:min-w-[200px] max-w-full sm:max-w-none cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 sm:h-14 px-6 sm:px-8 bg-primary text-background-dark text-base sm:text-lg font-black uppercase tracking-wider transition-all hover:shadow-[0_0_20px_rgba(201,162,77,0.5)] hover:scale-105 active:scale-95">
               <span className="truncate">Download Brochure</span>
             </button>
             <button 
