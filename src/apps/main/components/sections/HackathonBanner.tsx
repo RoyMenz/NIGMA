@@ -43,7 +43,7 @@ const HackathonBanner: React.FC = () => {
               </div>
               <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-primary/40 bg-primary/5 backdrop-blur-sm shadow-[0_0_15px_rgba(201,162,77,0.1)]">
                 <p className="text-white/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Grand Prize</p>
-                <p className="text-foreground tracking-tight text-2xl sm:text-3xl font-black leading-tight">₹50,000</p>
+                <p className="text-foreground tracking-tight text-2xl sm:text-3xl font-black leading-tight">Upto ₹40,000</p>
               </div>
               <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm">
                 <p className="text-foreground/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Battalions</p>

@@ -61,7 +61,7 @@ const TechnicalTeam: React.FC = () => {
         <div className="text-center mb-14">
           <p className="text-primary font-semibold tracking-[0.3em] uppercase text-xs md:text-sm flex items-center justify-center gap-3">
             <span className="h-px w-10 bg-primary/40" />
-            Architects of Asgard
+            Technical Architects of N-IGMA 26
             <span className="h-px w-10 bg-primary/40" />
           </p>
           <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-black tracking-tight bg-gradient-to-b from-foreground via-foreground to-primary/40 bg-clip-text text-transparent">
@@ -69,7 +69,7 @@ const TechnicalTeam: React.FC = () => {
           </h2>
           <p className="mt-4 max-w-2xl mx-auto text-sm md:text-base text-[#bab09c]">
             The keepers of the digital Bifrost — crafting, guarding, and
-            scaling the tech that powers Ragnarok.
+            scaling the tech that powers Ragnarok Website.
           </p>
         </div>
 
