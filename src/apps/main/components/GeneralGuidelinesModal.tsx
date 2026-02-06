@@ -59,6 +59,13 @@ const GeneralGuidelinesModal: React.FC<GeneralGuidelinesModalProps> = ({ isOpen,
         </div>
 
         <div className="modal-content-wrapper">
+          <div className="modal-back-btn-wrapper">
+            <button className="modal-back-btn" onClick={onClose}>
+              <span className="material-symbols-outlined">arrow_back</span>
+              <span>Back</span>
+            </button>
+          </div>
+
           <div className="golden-scroll">
             <div className="scroll-content">
               <div className="scroll-header">
