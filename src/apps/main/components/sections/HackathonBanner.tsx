@@ -40,15 +40,15 @@ const HackathonBanner: React.FC = () => {
 
             {/* Stats Grid */}
             <div className="hackathon-banner-stats flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 w-full max-w-[800px] z-10 px-2">
-              <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm">
+              <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm text-center">
                 <p className="text-white/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Duration</p>
                 <p className="text-primary tracking-tight text-2xl sm:text-3xl font-black leading-tight">20 Hours</p>
               </div>
-              <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-primary/40 bg-primary/5 backdrop-blur-sm shadow-[0_0_15px_rgba(201,162,77,0.1)]">
+              <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-primary/40 bg-primary/5 backdrop-blur-sm shadow-[0_0_15px_rgba(201,162,77,0.1)] text-center">
                 <p className="text-white/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Grand Prize</p>
                 <p className="text-foreground tracking-tight text-2xl sm:text-3xl font-black leading-tight">Upto ₹40,000</p>
               </div>
-              <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm">
+              <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center justify-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm text-center">
                 <p className="text-foreground/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Battalions</p>
                 <p className="text-primary tracking-tight text-2xl sm:text-3xl font-black leading-tight">2-4 Members</p>
               </div>
