@@ -59,9 +59,6 @@
 }
 
 .arena-logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,6 +149,19 @@
   background: rgba(201, 162, 77, 0.1);
 }
 
+/* Desktop: logo centered, button right - unchanged */
+@media (min-width: 769px) {
+  .arena-header-content {
+    justify-content: flex-end;
+  }
+
+  .arena-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 768px) {
   .arena-header-content {
     height: 4rem;
@@ -159,14 +169,21 @@
     gap: 1rem;
   }
 
+  /* Mobile: logo left, hackathon button right - remove absolute centering */
+  .arena-logo {
+    position: relative;
+    left: auto;
+    transform: none;
+  }
+
   .arena-logo img {
-    height: 2.5rem;
-    max-width: 120px;
+    height: 3rem;
+    max-width: 140px;
   }
 
   .arena-register-btn {
     padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     touch-action: manipulation;
   }
 }
@@ -178,15 +195,15 @@
   }
 
   .arena-logo img {
-    height: 2.25rem;
-    max-width: 100px;
+    height: 2.75rem;
+    max-width: 130px;
   }
 
   .arena-register-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.8125rem;
     letter-spacing: 0.08em;
-    min-height: 40px;
+    min-height: 44px;
   }
 }
 

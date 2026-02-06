@@ -1,21 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './TechnicalTeam.css';
 import ronith from '../../../../assets/images/ronith.png';
 import prarthana from '../../../../assets/images/prarthana.png';
 import royston from '../../../../assets/images/royston.png';
 
-// import prarthana from '../prarthana.png';
-// import royston from '../royston.png';
+const MOBILE_BREAKPOINT = 768;
 
 const TechnicalTeam: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [scrollActiveIndex, setScrollActiveIndex] = useState<number | null>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([null, null, null]);
+  const ratiosRef = useRef<number[]>([0, 0, 0]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = cardRefs.current.indexOf(entry.target as HTMLDivElement);
+          if (index >= 0) {
+            ratiosRef.current[index] = entry.intersectionRatio;
+            const ratios = [...ratiosRef.current];
+            const max = Math.max(...ratios);
+            const idx = max > 0.1 ? ratios.indexOf(max) : null;
+            setScrollActiveIndex(idx);
+          }
+        });
+      },
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+        rootMargin: '-15% 0px -15% 0px',
+      }
+    );
+
+    cardRefs.current.filter(Boolean).forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   const getCardClass = (index: number) => {
     const base = 'technical-card group relative flex flex-col items-center';
+    const activeIndex = isMobile ? scrollActiveIndex : hoveredIndex;
 
-    if (hoveredIndex === null) return base;
-    if (hoveredIndex === index) return `${base} technical-card--active`;
-    if (hoveredIndex < index) return `${base} technical-card--right`;
+    if (activeIndex === null) return base;
+    if (activeIndex === index) return `${base} technical-card--active`;
+    if (activeIndex < index) return `${base} technical-card--right`;
     return `${base} technical-card--left`;
   };
 
@@ -76,12 +113,13 @@ const TechnicalTeam: React.FC = () => {
         {/* Team grid */}
         <div
           className="technical-team-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12"
-          onMouseLeave={() => setHoveredIndex(null)}
+          onMouseLeave={() => !isMobile && setHoveredIndex(null)}
         >
           {/* Member 1 */}
           <div
+            ref={(el) => { cardRefs.current[0] = el; }}
             className={getCardClass(0)}
-            onMouseEnter={() => setHoveredIndex(0)}
+            onMouseEnter={() => !isMobile && setHoveredIndex(0)}
           >
             <div className="relative w-52 h-72 md:w-56 md:h-80 transition-transform duration-500 group-hover:-translate-y-4">
               <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
@@ -108,8 +146,9 @@ const TechnicalTeam: React.FC = () => {
 
           {/* Member 2 */}
           <div
+            ref={(el) => { cardRefs.current[1] = el; }}
             className={getCardClass(1)}
-            onMouseEnter={() => setHoveredIndex(1)}
+            onMouseEnter={() => !isMobile && setHoveredIndex(1)}
           >
             <div className="relative w-52 h-72 md:w-56 md:h-80 transition-transform duration-500 group-hover:-translate-y-4">
               <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
@@ -136,8 +175,9 @@ const TechnicalTeam: React.FC = () => {
 
           {/* Member 3 */}
           <div
+            ref={(el) => { cardRefs.current[2] = el; }}
             className={getCardClass(2)}
-            onMouseEnter={() => setHoveredIndex(2)}
+            onMouseEnter={() => !isMobile && setHoveredIndex(2)}
           >
             <div className="relative w-52 h-72 md:w-56 md:h-80 transition-transform duration-500 group-hover:-translate-y-4">
               <div className="absolute inset-0 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />

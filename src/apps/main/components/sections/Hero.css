@@ -82,7 +82,7 @@
   }
 
   .hero-logo {
-    max-width: min(90vw, 280px);
+    max-width: min(92vw, 340px);
   }
 
   .hero-content-inner > .hero-text-block:nth-child(2) {
