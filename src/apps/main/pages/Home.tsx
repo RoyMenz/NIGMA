@@ -38,7 +38,7 @@ const Home: React.FC = () => {
         <Header />
         <main className="flex-1">
           <Hero />
-          <div className="pt-8 sm:pt-12 md:pt-16 px-0 overflow-x-hidden">
+          <div className="px-0">
             <ScrollReveal direction="up" delay={0} amount={0.12} once={false}>
               <CountdownTimer targetDate={eventDate} />
             </ScrollReveal>

@@ -9,19 +9,19 @@
   backdrop-filter: none;
   background: transparent;
   border-bottom: 1px solid transparent;
-  padding: 0 1rem;
+  padding: 0 1.5rem;
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-@media (min-width: 384px) {
+@media (max-width: 640px) {
   .landing-header {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
   }
 }
 
-@media (min-width: 640px) {
+@media (max-width: 480px) {
   .landing-header {
-    padding: 0 1.5rem;
+    padding: 0 0.75rem;
   }
 }
 
@@ -57,7 +57,7 @@
 }
 
 .landing-logo img {
-  height: 3.625rem; /* 58px: 48px + 10px */
+  height: 3.625rem;
   width: auto;
   object-fit: contain;
 }
@@ -80,7 +80,15 @@
 
 @media (max-width: 768px) {
   .landing-logo img {
-    height: 3.125rem; /* 50px: 40px + 10px */
+    height: 3.125rem;
+    max-width: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .landing-logo img {
+    height: 2.5rem;
+    max-width: 120px;
   }
 }
 
@@ -127,17 +135,20 @@
   .landing-hackathon-btn {
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
+    touch-action: manipulation;
   }
 }
 
 @media (max-width: 480px) {
   .landing-header-content {
     height: 3.5rem;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .landing-hackathon-btn {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    min-height: 40px;
   }
 }

@@ -1,2 +1,12 @@
 /* CTA section-specific styles can go here if needed */
 /* Currently using Tailwind classes, but this file is ready for custom styles */
+
+/* Mobile-only overrides - desktop unchanged */
+@media (max-width: 639px) {
+  .cta-register-btn {
+    height: 2.75rem;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    touch-action: manipulation;
+  }
+}

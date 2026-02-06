@@ -1,2 +1,25 @@
 /* HackathonBanner-specific styles can go here if needed */
 /* Currently using Tailwind classes and global utility classes */
+
+/* Mobile-only overrides - desktop unchanged */
+@media (max-width: 639px) {
+  .hackathon-cta-btn {
+    height: 2.5rem !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 0.75rem !important;
+    min-height: 44px;
+  }
+
+  .hackathon-cta-btn .material-symbols-outlined {
+    font-size: 1rem;
+  }
+
+  .hackathon-banner-stats > div {
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .hackathon-banner-stats > div p:last-child {
+    font-size: 1rem;
+  }
+}

@@ -27,7 +27,7 @@ const CTA: React.FC = () => {
           </div>
 
           <div className="relative z-10 w-full max-w-sm">
-            <button className="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-primary text-background-dark text-lg font-black uppercase tracking-widest transition-all hover:scale-[1.02] shadow-[0_10px_30px_-10px_rgba(201,162,77,0.4)]">
+            <button className="cta-register-btn w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-lg h-14 bg-primary text-background-dark text-lg font-black uppercase tracking-widest transition-all hover:scale-[1.02] shadow-[0_10px_30px_-10px_rgba(201,162,77,0.4)]">
               <span className="truncate">Register Now</span>
             </button>
             <p className="mt-4 text-xs text-[#544c3b] uppercase font-bold tracking-widest">

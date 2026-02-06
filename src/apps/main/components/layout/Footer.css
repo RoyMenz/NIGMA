@@ -23,6 +23,10 @@
 }
 
 @media (max-width: 480px) {
+  .landing-footer .arena-footer-content {
+    padding: 0 0.75rem;
+  }
+
   .landing-footer .arena-footer-links {
     row-gap: 0.5rem;
   }
@@ -30,5 +34,18 @@
   .landing-footer .arena-footer-text {
     letter-spacing: 0.18em;
     padding-bottom: 1.5rem;
+  }
+
+  .footer-tech-btn {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.75rem !important;
+    min-height: 40px;
+  }
+
+  .modal-close-btn {
+    right: 0.5rem !important;
+    top: 0.5rem !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.625rem !important;
   }
 }

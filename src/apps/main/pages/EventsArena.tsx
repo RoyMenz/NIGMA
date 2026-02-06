@@ -19,7 +19,7 @@ interface EventCardData {
 
 const eventsData: EventCardData[] = [
   // Commerce & Management (5)
-  { id: 1, title: 'Best Manager', description: 'Inter-college management challenge.', venue: 'Main Hall', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAlpOL5H-EQtdnU7JAFVgncgGwi3xC1sq8yQC-5CfNPwUBUmV-4hiOYEQfTFkZOp-0y3IXI-rDVWYR_x7Q_KuGBdhWbDGjFCOn16bdT0_d36sovYliF19nc1wnLGwODR4HbEbn51sLP-6OloWwF4rHQj4qu__Z-jYy7lu5nGBKCEwAADPSyhvEo_Y8WKzzVCD_ZwIcBJnZdFOw5ajRFU3pEdjNPtlW_FS3f1p4ycXS5xP7HWM2c10EQY5qdxLGdvEElHnXH_PrHsDRc', imageAlt: 'Best Manager' },
+  { id: 1, title: 'Best Manager', description: 'Inter-college management challenge.', venue: 'Main Hall', category: 'Commerce', image: '../../../assets/images/bestmanager.jpeg', imageAlt: 'Best Manager' },
   { id: 2, title: 'Finance', description: 'Finance case challenge and trading simulations.', venue: 'Finance Lab', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAomt3vUjw5_OtEYxF5V8nKTeIFKaZ6Bb_mvrcrHxic5jLj9l3k_YO_wJmy3-iwcdNwpTo2t5afJPs8PiaheDagAyZw-j_XFCIhixZahN02bRAM2kTsOqo_-5G0VKV7UgriyDiRzRtsTNxWB3lWyQE4wDo4CoUKC8mbV2bFhl1xfzE_WyQNUjTsSUld5ijl4xGqhV0dksbrnyy8Lhkne9GchDMaRXaIVo5iHL_USS6zTr_wYOe22QXWyx_egBDcj39gwwdFUHLbUrQw', imageAlt: 'Finance' },
   { id: 3, title: 'Marketing', description: 'Marketing strategy and campaign creation.', venue: 'Auditorium', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMzCFszPEnObGGwpkYAgqUi4ieq6psoe-VAzW9gghBHc-SLeiyRzvllcmgBUzsmRIKCFHldNfNzzc8t9S-Ly1inUqQlW9OOk3BIXPQd21f31BdNrgBsd0Oj8roKOf6v5QDy_nKnpqYup-W_RaCcszhGJDWCh_azQaCU65zz9IkEuHeXW8xeHlj9IlT2gkqE1IuOjQU4ksgqj22L-7InjH-5v54syFTaMIOEMt7gkJJRVSMPTQBEfs8sLJ8itMJElXthjrDKM_4kNFh', imageAlt: 'Marketing' },
   { id: 4, title: 'Human Resource', description: 'HR challenges and role plays.', venue: 'HR Room', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDm3R-_pcS85tICJR-BxsxMAq4f8bYcRxYi9IM54JJ3ZoMZOE94ZALhcL85X3-AgF-UIzH6bEKza9TOZTdbsMDFhoofY0B3pAMOQmESQZtxlIbfHplSFIUQ6l4eJZwxAF_UapM7P1veq2VQMGGYwr2A--xVmQoyIOQp_ELlsmT-T1mEeEfiYLJUnIRax1yc29ezNFo58-qXyUPWkgtDWMeYltXfAM9BRwfjyfQqJxJnma11mxby-AD7xSYocTRQoUNv2vGgMWq41G5Q', imageAlt: 'Human Resource' },
@@ -44,7 +44,7 @@ const categories = [
   { id: 'all', icon: 'all_inclusive', label: 'All Trials' },
   { id: 'Commerce', icon: 'store', label: 'Commerce & Management' },
   { id: 'it', icon: 'memory', label: 'IT & Technical' },
-  { id: 'variety', icon: 'theaters', label: 'Variety Events' }
+  { id: 'variety', icon: 'theaters', label: 'Cultural Events' }
 ];
 
 const EventsArena: React.FC = () => {
@@ -194,7 +194,7 @@ const EventsArena: React.FC = () => {
               </div>
             </div>
           </div> */}
-          <p className="arena-footer-text">Ragnarok © 2026 • Powered by the Forge of Asgard</p>
+          <p className="arena-footer-text">N-IGMA © 2026 • Powered by the Forge of Young Minds</p>
         </footer>
       </main>
 

@@ -75,12 +75,6 @@
   object-fit: contain;
 }
 
-@media (max-width: 768px) {
-  .arena-logo img {
-    height: 2.5rem;
-  }
-}
-
 .arena-nav-links {
   display: none;
   align-items: center;
@@ -98,24 +92,12 @@
 }
 
 @media (max-width: 767px) {
-  .arena-header-content {
-    height: 4rem;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  
   .arena-nav-left {
     gap: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .arena-header-content {
-    height: 3.5rem;
-    justify-content: space-between;
-    gap: 0.75rem;
-  }
-  
   .arena-nav-left {
     gap: 1rem;
   }
@@ -171,16 +153,40 @@
 }
 
 @media (max-width: 768px) {
+  .arena-header-content {
+    height: 4rem;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .arena-logo img {
+    height: 2.5rem;
+    max-width: 120px;
+  }
+
   .arena-register-btn {
     padding: 0.75rem 1.5rem;
     font-size: 0.875rem;
+    touch-action: manipulation;
   }
 }
 
 @media (max-width: 480px) {
+  .arena-header-content {
+    height: 3.5rem;
+    gap: 0.5rem;
+  }
+
+  .arena-logo img {
+    height: 2.25rem;
+    max-width: 100px;
+  }
+
   .arena-register-btn {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    min-height: 40px;
   }
 }
 
@@ -215,6 +221,26 @@
 .arena-hero {
   margin-bottom: 3rem;
   position: relative;
+}
+
+@media (max-width: 639px) {
+  .arena-hero {
+    margin-bottom: 1.5rem;
+  }
+
+  .arena-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .arena-subtitle {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+
+  .arena-main {
+    padding: 1rem 0.5rem;
+  }
 }
 
 .arena-glow-effect {
@@ -362,12 +388,32 @@
   }
 }
 
+@media (max-width: 639px) {
+  .arena-category-btn {
+    padding: 0.5rem 0.75rem;
+    gap: 0.35rem;
+    min-height: 40px;
+  }
+
+  .arena-category-btn span:last-child {
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+  }
+}
+
 /* Events Grid */
 .arena-events-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
   margin-bottom: 4rem;
+}
+
+@media (max-width: 639px) {
+  .arena-events-grid {
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
 }
 
 @media (min-width: 768px) {
@@ -571,6 +617,18 @@
   transition: all 0.3s;
 }
 
+@media (max-width: 639px) {
+  .arena-card-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+}
+
 .arena-card-btn:hover {
   background: linear-gradient(145deg, #2d6a94, #4FA3D1);
   color: #e5f7fc;
@@ -582,6 +640,13 @@
   padding-top: 3rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
+}
+
+@media (max-width: 639px) {
+  .arena-footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+  }
 }
 
 .arena-footer-content {

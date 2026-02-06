@@ -1,2 +1,12 @@
 /* InfoMap-specific styles */
 /* Currently using Tailwind classes and global utility classes */
+
+/* Mobile-only overrides - desktop unchanged */
+@media (max-width: 639px) {
+  .info-map-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}

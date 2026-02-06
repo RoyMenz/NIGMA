@@ -1,17 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { getTeamSize } from '../data/eventDetails';
+import { getTeamSize, type EventDetail } from '../data/eventDetails';
 import './EventDetailModal.css';
-
-interface EventDetail {
-  id: number;
-  title: string;
-  description: string;
-  quote: string;
-  icon: string;
-  teamSize?: number;
-  rules: string[];
-  registrationDeadline?: string;
-}
 
 interface EventDetailModalProps {
   event: EventDetail | null;
@@ -592,7 +581,8 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                         <span className="form-submit-overlay"></span>
                         <div className="form-submit-content">
                           <span className="material-symbols-outlined">arrow_forward</span>
-                          Continue — Enter participant details
+                          <span className="hidden sm:inline">Continue — Enter participant details</span>
+                          <span className="sm:hidden">Continue</span>
                           <span className="material-symbols-outlined">arrow_forward</span>
                         </div>
                       </button>
@@ -629,7 +619,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                       <label className="form-label">City, State</label>
                       <input 
                         className="form-input" 
-                        placeholder="Midgard, NY" 
+                        placeholder="Udupi,Karnataka" 
                         required 
                         type="text"
                         value={members[currentMemberIndex]?.cityState || ''}
@@ -640,7 +630,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                       <label className="form-label">Phone Number</label>
                       <input 
                         className="form-input" 
-                        placeholder="+1 (555) VALHALLA" 
+                        placeholder="+91 **********" 
                         required 
                         type="tel"
                         value={members[currentMemberIndex]?.phone || ''}

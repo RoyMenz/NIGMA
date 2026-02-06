@@ -8,31 +8,15 @@ const Footer: React.FC = () => {
   return (
     <>
       <footer className="arena-footer landing-footer">
-        <div className="arena-footer-content">
-          <div className="arena-footer-links">
-            <a href="#rules">Book of Rules</a>
-            <span className="arena-footer-divider">•</span>
-            <a href="#conduct">Code of Conduct</a>
-            <span className="arena-footer-divider">•</span>
-            <a href="#privacy">Privacy Rune</a>
-          </div>
+        <div className="arena-footer-content" style={{ justifyContent: 'center', padding: '1rem' }}>
           <button
             type="button"
             onClick={() => setIsTechTeamOpen(true)}
-            className="px-4 py-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-background-dark transition-colors text-xs md:text-sm mt-2 md:mt-0"
-          >
+            className="footer-tech-btn px-5 py-2.5 rounded-full border border-primary text-primary hover:bg-primary hover:text-background-dark transition-colors text-sm md:text-base min-h-[44px] touch-action-manipulation">
             Technical Team
-          </button>
-          <div className="arena-footer-social">
-            <div className="arena-social-icon">
-              <span className="material-symbols-outlined">alternate_email</span>
-            </div>
-            <div className="arena-social-icon">
-              <span className="material-symbols-outlined">public</span>
-            </div>
-          </div>
+          </button>            
         </div>
-        <p className="arena-footer-text">Ragnarok © 2064 • Powered by the Forge of Asgard</p>
+        <p className="arena-footer-text">N-IGMA © 2026 • Powered by the Forge of Young Minds</p>
       </footer>
 
       {isTechTeamOpen && (
@@ -41,7 +25,7 @@ const Footer: React.FC = () => {
             <button
               type="button"
               onClick={() => setIsTechTeamOpen(false)}
-              className="absolute right-4 top-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-background-dark/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-foreground/10"
+              className="absolute right-4 top-4 inline-flex items-center justify-center rounded-full border border-white/20 bg-background-dark/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-foreground/10 modal-close-btn touch-action-manipulation"
             >
               Close
             </button>

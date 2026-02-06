@@ -25,3 +25,29 @@
   position: relative;
   z-index: 1;
 }
+
+/* Mobile-only overrides - desktop unchanged */
+@media (max-width: 639px) {
+  .countdown-units {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.375rem;
+  }
+
+  .countdown-units > div {
+    flex: none;
+  }
+
+  .countdown-units > div > div:first-child {
+    height: 3rem;
+    border-radius: 0.5rem;
+  }
+
+  .countdown-units > div > div:first-child p {
+    font-size: 1.125rem;
+  }
+
+  .countdown-units > div > div:last-child p {
+    font-size: 0.625rem;
+  }
+}

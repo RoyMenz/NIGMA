@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import './TechnicalTeam.css';
+import ronith from '../../../../assets/images/ronith.png';
+import prarthana from '../../../../assets/images/prarthana.png';
+import royston from '../../../../assets/images/royston.png';
+
+// import prarthana from '../prarthana.png';
+// import royston from '../royston.png';
 
 const TechnicalTeam: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -83,7 +89,7 @@ const TechnicalTeam: React.FC = () => {
                 className="w-full h-full bg-center bg-no-repeat bg-contain transform group-hover:scale-110 transition-transform duration-500"
                 style={{
                   backgroundImage:
-                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCd8lQcXiOmfy2Ip4VwpIXIYZcwOwPFauv59nsmN4NbBpOg-S8I9QRXjctUFeBfGkFVxt2zmXvPhRSHbjThUnIUI2XYLiY2L8gbFNMCbaKwxljJS4_klnZDRsV9xL-Vx71soc9_cDkN-CX4Jxm_FOdu7wyyja9w5eT7qKPlKdA4AB8dBHX7XLGpirhO5vYqKDEyE9xzGyJKYTpFOwX_8VOTSZE-XOj1iQ2rfkEoSQ5izCh4B2wqjPIIX_lvcK-fCUsQ8WNmOIqjjATO")',
+                    'url("' + ronith + '")',
                 }}
               />
             </div>
@@ -111,7 +117,7 @@ const TechnicalTeam: React.FC = () => {
                 className="w-full h-full bg-center bg-no-repeat bg-contain transform group-hover:scale-110 transition-transform duration-500"
                 style={{
                   backgroundImage:
-                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCyS6Z1yjafR1Q-UsrsWH4JO7GcjtxdnSHeUiAdpOZZmBYEqHPAXiEO4Zl0PGKxqSOHU-BgxGKORdrJRaJkRStXLPWt1lr0s2bs4PuLX2QjMsQ2sUl-XeseFql2qygVykJU1_ANtPfcdizg-erBRZoTzf8VwQlDjHlm32ib5le6uHRrjXJkH1rRvt4vdomn7GMooDqFFwEKKRAZrc7j6cK2yspeCspL-Z7-ePC6RShev5oD10PL7cH99wScxzIXNkC-e95uwpgWpZ4h")',
+                    'url("' + prarthana + '")',
                 }}
               />
             </div>
@@ -139,7 +145,7 @@ const TechnicalTeam: React.FC = () => {
                 className="w-full h-full bg-center bg-no-repeat bg-contain transform group-hover:scale-110 transition-transform duration-500"
                 style={{
                   backgroundImage:
-                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBfWyXg-8CucemtQwq66Kuoqw3lk-FBZ2ByNxy8CbZZmaRlM7VV7VaKOV6ZIUlyTR2eaBRs6Z2H-QEP_68NKtWDdqm0rTWSc__MXGwJFQXm0E7cz9j1Yib4Zv0l6faRWjvd6qLSyAHOMho8gvgjwcpVBikkEvsensTdhReXHocG7wjSwxXwtSbkf3FQIq17eSc_5S0WZAxqOHnK9kwTWO240JKJLrdG6Dz5mbop7tSPoHK5XTpjpQAYgjsW110Ow1HGU9QZQHOzUYsA")',
+                    'url("' + royston + '")',
                 }}
               />
             </div>
