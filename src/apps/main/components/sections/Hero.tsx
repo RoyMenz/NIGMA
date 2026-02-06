@@ -30,7 +30,7 @@ const Hero: React.FC = () => {
 
           <div className="hero-text-block border-2 border-[#4FA3D1] bg-[#4FA3D1] rounded-lg px-6 py-3 pointer-events-none">
             <p className="text-black text-lg sm:text-xl font-bold tracking-wider">
-              FEBRUARY 25-26 2026
+              FEBRUARY 25-26
             </p>
           </div>
 

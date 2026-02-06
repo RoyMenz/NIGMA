@@ -62,14 +62,14 @@
   }
 
   .hero-content-inner {
-    gap: 0.35rem;
+    gap: 0.90rem;
   }
 
   .hero-actions {
     width: 100%;
     flex-direction: column;
     align-items: stretch;
-    gap: 0.35rem;
+    gap: 0.90rem;
     margin-top: 0;
   }
 
