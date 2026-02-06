@@ -133,6 +133,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
         );
       }
 
+      // Backend success — transition to success screen
       setIsFlipping(true);
       setTimeout(() => {
         setShowRegistration(false);
@@ -152,9 +153,9 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       
-      // Handle ESC key to close modal
+      // Handle ESC key to close modal (not during submission)
       const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && !isSubmitting) {
           onClose();
         }
       };
@@ -176,7 +177,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, isSubmitting]);
 
   // Reset registration members when event or modal opens
   useEffect(() => {
@@ -428,6 +429,17 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
         ref={canvasRef}
         className="modal-constellation-canvas"
       />
+
+      {/* Loading overlay when submitting — no close, blocks interaction */}
+      {isSubmitting && (
+        <div className="registration-loading-overlay" onClick={(e) => e.stopPropagation()}>
+          <div className="registration-loading-content">
+            <div className="registration-loading-spinner"></div>
+            <p className="registration-loading-text">Submitting...</p>
+            <p className="registration-loading-subtext">Please wait while we register your team</p>
+          </div>
+        </div>
+      )}
       
       <div className="modal-container" onClick={(e) => e.stopPropagation()}>
         {/* Fixed Torches */}
@@ -482,12 +494,6 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                   </div>
                 </div>
 
-                <div className="success-actions">
-                  <button className="success-return-btn" onClick={onClose}>
-                    <span className="material-symbols-outlined">arrow_back</span>
-                    <span>Back to Events</span>
-                  </button>
-                </div>
               </div>
             ) : !showRegistration ? (
               <div className="scroll-content">

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import landingLogo from '../../../../assets/images/landing logo.png';
+import GeneralGuidelinesModal from '../GeneralGuidelinesModal';
 import './Hero.css';
 
 const Hero: React.FC = () => {
   const navigate = useNavigate();
   const [isMounted, setIsMounted] = useState(false);
+  const [isGuidelinesOpen, setIsGuidelinesOpen] = useState(false);
 
   useEffect(() => {
     const timer = window.requestAnimationFrame(() => setIsMounted(true));
@@ -48,12 +50,20 @@ const Hero: React.FC = () => {
             </button>
           </div>
 
-          <button className="hero-text-block w-full max-w-[600px] flex items-center justify-center border-2 border-[#4FA3D1] bg-[#4FA3D1] rounded-lg px-6 py-3 text-black text-base sm:text-lg font-black uppercase tracking-wider cursor-pointer hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(201,162,77,0.5)] transition-all">
+          <button
+            onClick={() => setIsGuidelinesOpen(true)}
+            className="hero-text-block w-full max-w-[600px] flex items-center justify-center border-2 border-[#4FA3D1] bg-[#4FA3D1] rounded-lg px-6 py-3 text-black text-base sm:text-lg font-black uppercase tracking-wider cursor-pointer hover:scale-105 active:scale-95 hover:shadow-[0_0_20px_rgba(201,162,77,0.5)] transition-all"
+          >
             <span className="truncate">GENERAL GUIDELINES</span>
           </button>
           </div>
         </div>
       </div>
+
+      <GeneralGuidelinesModal
+        isOpen={isGuidelinesOpen}
+        onClose={() => setIsGuidelinesOpen(false)}
+      />
     </section>
   );
 };
