@@ -105,7 +105,7 @@ export const eventDetails: EventDetail[] = [
       'Participants must report 15 minutes before the schedule.',
       'Judges and organizers decisions will be final.',
       'Any form of misbehaviour or indiscipline will lead to disqualification.',
-      'Dress Code: Formal or business casual.',
+      'Dress Code: Formal or business casuals.',
       'Strict time limit will be followed for each round.'
     ]
   },

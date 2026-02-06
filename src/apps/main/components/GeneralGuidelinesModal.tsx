@@ -77,7 +77,7 @@ const GeneralGuidelinesModal: React.FC<GeneralGuidelinesModalProps> = ({ isOpen,
               </div>
 
               <div className="scroll-quote">
-                <p>N-IGMA 2026 — The Code of Conduct for All Participants</p>
+                <p>N-IGMA 2026 — The Code of Conduct</p>
               </div>
 
               <div className="scroll-section">
