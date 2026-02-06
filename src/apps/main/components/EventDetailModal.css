@@ -1673,3 +1673,84 @@ body.modal-open {
     font-size: 1.25rem;
   }
 }
+
+/* Hackathon Coming Soon Modal - constellation + blue-gold gradient */
+.hackathon-coming-soon-overlay {
+  background-color: rgba(11, 28, 45, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+@media (max-width: 639px) {
+  .hackathon-coming-soon-overlay {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+}
+
+.hackathon-modal-constellation {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  contain: strict;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+.hackathon-modal-constellation canvas {
+  opacity: 0.85;
+}
+
+.hackathon-modal-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hackathon-coming-soon-scroll {
+  position: relative;
+  overflow: hidden;
+}
+
+.hackathon-modal-watermark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 5vw, 2rem);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.16);
+  transform: rotate(-25deg);
+  white-space: nowrap;
+}
+
+.hackathon-coming-soon-container {
+  z-index: 10;
+}
+
+.hackathon-coming-soon-quote {
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+.hackathon-coming-soon-quote p {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.hackathon-coming-soon-quote p:last-child {
+  margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+  .hackathon-coming-soon-quote p {
+    font-size: 1rem;
+  }
+}

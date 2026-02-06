@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EventDetailModal from '../components/EventDetailModal';
+import { useHackathonComingSoon } from '../contexts/HackathonComingSoonContext';
 import { eventDetails, getTeamSizeDisplay } from '../data/eventDetails';
 import type { EventDetail } from '../data/eventDetails';
 import ConstellationBackground from '../../../shared/components/ConstellationBackground';
@@ -55,8 +56,13 @@ const EventsArena: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventDetail | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const { open: openHackathonComingSoon } = useHackathonComingSoon();
 
   const handleViewScroll = (eventId: number) => {
+    if (eventId === 10) {
+      openHackathonComingSoon();
+      return;
+    }
     const event = eventDetails.find(e => e.id === eventId);
     if (event) {
       setSelectedEvent(event);
@@ -98,7 +104,7 @@ const EventsArena: React.FC = () => {
             />
           </div>
           <div className="arena-nav-right">
-            <button className="arena-register-btn">Hackathon</button>
+            <button className="arena-register-btn" onClick={openHackathonComingSoon}>Hackathon</button>
           </div>
         </div>
       </header>
@@ -168,7 +174,6 @@ const EventsArena: React.FC = () => {
               <button 
                 className="arena-card-btn"
                 onClick={() => handleViewScroll(event.id)}
-                disabled={event.id === 10}
                 title={event.id === 10 ? 'Registration disabled — Hackathon page coming soon' : 'View details'}
               >
                 <span>{event.id === 10 ? 'Coming soon' : 'View Scroll'}</span>

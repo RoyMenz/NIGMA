@@ -1,7 +1,10 @@
 import React from 'react';
 import './HackathonBanner.css';
+import { useHackathonComingSoon } from '../../contexts/HackathonComingSoonContext';
 
 const HackathonBanner: React.FC = () => {
+  const { open: openHackathonComingSoon } = useHackathonComingSoon();
+
   return (
     <section className="w-full flex justify-center mt-[5px] px-2 sm:px-4">
       <div className="flex flex-col max-w-[1200px] w-full px-2 sm:px-4 md:px-6">
@@ -27,7 +30,7 @@ const HackathonBanner: React.FC = () => {
                 </span>
               </div>
               <h1 className="text-foreground text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-black leading-tight tracking-[-0.033em] uppercase px-2">
-               <span className="text-primary">Ragnacode</span>
+               <span className="text-primary">Ragnocode</span>
               </h1>
               <h2 className="text-foreground/80 text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed px-2 sm:px-4">
                 20 Hours of Immortal Creation. Forge your legacy in code. Assemble your pantheon of
@@ -38,7 +41,7 @@ const HackathonBanner: React.FC = () => {
             {/* Stats Grid */}
             <div className="hackathon-banner-stats flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 w-full max-w-[800px] z-10 px-2">
               <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-stone-border bg-background-dark/40 backdrop-blur-sm">
-                <p className="text-white/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Endurance</p>
+                <p className="text-white/60 text-[10px] sm:text-xs font-bold uppercase tracking-tighter">Duration</p>
                 <p className="text-primary tracking-tight text-2xl sm:text-3xl font-black leading-tight">20 Hours</p>
               </div>
               <div className="flex min-w-[120px] sm:min-w-[140px] md:min-w-[160px] lg:min-w-[180px] flex-1 flex-col items-center gap-1.5 sm:gap-2 rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-6 border border-primary/40 bg-primary/5 backdrop-blur-sm shadow-[0_0_15px_rgba(201,162,77,0.1)]">
@@ -53,7 +56,10 @@ const HackathonBanner: React.FC = () => {
 
             {/* CTA */}
             <div className="flex flex-col items-center gap-4 sm:gap-6 mt-2 sm:mt-4 z-10 w-full px-2">
-              <button className="group hackathon-cta-btn flex w-full sm:w-auto min-w-0 sm:min-w-[280px] max-w-[320px] sm:max-w-none cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 sm:h-14 md:h-16 px-6 sm:px-8 bg-primary text-background-dark text-sm sm:text-base md:text-lg font-black uppercase tracking-[0.1em] hover:bg-foreground transition-all shadow-xl min-h-[48px] touch-action-manipulation active:scale-95">
+              <button
+                onClick={openHackathonComingSoon}
+                className="group hackathon-cta-btn flex w-full sm:w-auto min-w-0 sm:min-w-[280px] max-w-[320px] sm:max-w-none cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 sm:h-14 md:h-16 px-6 sm:px-8 bg-primary text-background-dark text-sm sm:text-base md:text-lg font-black uppercase tracking-[0.1em] hover:bg-foreground transition-all shadow-xl min-h-[48px] touch-action-manipulation active:scale-95"
+              >
                 <span className="flex items-center gap-2 sm:gap-3">
                   COMING SOON
                   <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform text-lg sm:text-xl">

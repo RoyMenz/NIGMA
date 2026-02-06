@@ -66,9 +66,9 @@ const ConstellationBackground: React.FC = () => {
             y: centerY + Math.sin(angle) * distance,
             size: Math.random() * 2 + 0.8,
             opacity: Math.random() * 0.4 + 0.4,
-            twinkleSpeed: Math.random() * 0.02 + 0.01,
-            vx: (Math.random() - 0.5) * 0.08,
-            vy: (Math.random() - 0.5) * 0.08,
+            twinkleSpeed: Math.random() * 0.06 + 0.03,
+            vx: (Math.random() - 0.5) * 0.24,
+            vy: (Math.random() - 0.5) * 0.24,
             color: clusterColor,
           });
         }
@@ -82,9 +82,9 @@ const ConstellationBackground: React.FC = () => {
           y: Math.random() * canvas.height,
           size: Math.random() * 1.5 + 0.5,
           opacity: Math.random() * 0.3 + 0.2,
-          twinkleSpeed: Math.random() * 0.02 + 0.01,
-          vx: (Math.random() - 0.5) * 0.1,
-          vy: (Math.random() - 0.5) * 0.1,
+          twinkleSpeed: Math.random() * 0.06 + 0.03,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
           color: Math.random() > 0.5 ? 'blue' : 'gold',
         });
       }
@@ -126,7 +126,7 @@ const ConstellationBackground: React.FC = () => {
     const animate = () => {
       if (!ctx || !canvas) return;
 
-      time.current += 0.01;
+      time.current += 0.04;
 
       // Clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
