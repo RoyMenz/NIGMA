@@ -26,7 +26,7 @@ const HackathonBanner: React.FC = () => {
             <div className="flex flex-col gap-3 sm:gap-4 text-center max-w-[700px] z-10 px-2">
               <div className="flex justify-center mb-1 sm:mb-2">
                 <span className="px-3 sm:px-4 py-1.5 rounded-full border border-primary text-primary text-[10px] sm:text-xs font-black tracking-[.3em] sm:tracking-[.4em] uppercase">
-                  Featured Event
+                  Flagship Event
                 </span>
               </div>
               <h1 className="text-foreground text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-black leading-tight tracking-[-0.033em] uppercase px-2">
