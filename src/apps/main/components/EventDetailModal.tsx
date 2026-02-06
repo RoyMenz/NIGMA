@@ -475,7 +475,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
           <div className="registration-loading-content">
             <div className="registration-loading-spinner"></div>
             <p className="registration-loading-text">Submitting...</p>
-            <p className="registration-loading-subtext">Please wait while we register your team</p>
+            <p className="registration-loading-subtext">Please wait while we register you</p>
           </div>
         </div>
       )}
@@ -523,10 +523,6 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                         <div className="success-info-item">
                           <span className="material-symbols-outlined">verified</span>
                           <p>Status: Confirmed</p>
-                        </div>
-                        <div className="success-info-item">
-                          <span className="material-symbols-outlined">military_tech</span>
-                          <p>Warrior ID: RAG-ODIN-2024</p>
                         </div>
                       </div>
                     </div>
