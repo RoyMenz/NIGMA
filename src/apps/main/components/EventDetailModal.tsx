@@ -40,6 +40,10 @@ const VARIETY_TEAM_OPTIONS = Array.from(
   (_, i) => VARIETY_TEAM_MIN + i
 );
 
+function normalizePhone(phone: string): string {
+  return phone.replace(/\D/g, '');
+}
+
 // Production backend URL. For local dev, set VITE_API_BASE_URL=http://localhost:8080 in .env
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend-9c02.onrender.com';
 
@@ -54,8 +58,10 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
   const [currentMemberIndex, setCurrentMemberIndex] = React.useState(0);
   /** For Variety Event only: chosen team size (10–17); null = show dropdown first. */
   const [selectedVarietyTeamSize, setSelectedVarietyTeamSize] = React.useState<number | null>(null);
-  /** Dropdown value for Variety Event (10–17) before continuing. */
-  const [varietyDropdownValue, setVarietyDropdownValue] = React.useState(VARIETY_TEAM_MIN);
+  /** Dropdown value for Variety Event (10–17) before continuing. '' = placeholder not selected. */
+  const [varietyDropdownValue, setVarietyDropdownValue] = React.useState<number | ''>('');
+  /** Set when backend returns 409 - duplicate registration. Contains normalized phone numbers. */
+  const [duplicateError, setDuplicateError] = React.useState<{ message: string; duplicatePhones: string[] } | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const isVarietyEvent = event?.id === VARIETY_EVENT_ID;
@@ -78,7 +84,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
   const handleBackToDetails = () => {
     if (event?.id === VARIETY_EVENT_ID) {
       setSelectedVarietyTeamSize(null);
-      setVarietyDropdownValue(VARIETY_TEAM_MIN);
+      setVarietyDropdownValue('');
     }
     setIsFlipping(true);
     setTimeout(() => {
@@ -89,6 +95,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
   const handleVarietyCountContinue = () => {
     const count = varietyDropdownValue;
+    if (typeof count !== 'number' || count < VARIETY_TEAM_MIN || count > VARIETY_TEAM_MAX) return;
     setSelectedVarietyTeamSize(count);
     setMembers(
       Array.from({ length: count }, () => ({
@@ -114,6 +121,14 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
     if (!event) return;
 
+    // Block submit if any phone is not exactly 10 digits (field restricts to 10, so this catches incomplete)
+    const phonesToValidate = members.slice(0, Math.max(1, effectiveTeamSize));
+    const invalidPhoneIndex = phonesToValidate.findIndex((m) => normalizePhone(m.phone || '').length !== 10);
+    if (invalidPhoneIndex >= 0) {
+      setCurrentMemberIndex(invalidPhoneIndex);
+      return;
+    }
+
     setIsSubmitting(true);
     try {
       const response = await fetch(`${API_BASE}/api/registrations`, {
@@ -127,11 +142,31 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
       if (!response.ok) {
         const errorBody = await response.json().catch(() => null);
+        if (response.status === 409 && errorBody?.error) {
+          const details = errorBody.error.details as Array<{ phone: string }> | undefined;
+          const duplicatePhones = Array.isArray(details)
+            ? details.map((d) => String(d?.phone ?? '')).filter(Boolean)
+            : [];
+          setDuplicateError({
+            message: errorBody.error.message ?? 'One or more members are already registered for an event',
+            duplicatePhones,
+          });
+          // Switch to first member with duplicate phone so user sees the highlighted field
+          const firstDuplicateIndex = members.findIndex((m) =>
+            duplicatePhones.includes(normalizePhone(m.phone || ''))
+          );
+          if (firstDuplicateIndex >= 0) {
+            setCurrentMemberIndex(firstDuplicateIndex);
+          }
+          return;
+        }
         throw new Error(
           errorBody?.error?.message ??
             `Registration failed with status ${response.status}`,
         );
       }
+
+      setDuplicateError(null);
 
       // Backend success — transition to success screen
       setIsFlipping(true);
@@ -141,7 +176,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
         setIsFlipping(false);
       }, 300);
     } catch (err) {
-      // Keep UI unchanged; log for debugging.
+      setDuplicateError(null);
       // eslint-disable-next-line no-console
       console.error(err);
     } finally {
@@ -167,11 +202,11 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
       };
     } else {
       document.body.style.overflow = 'unset';
-      // Reset to event details when modal closes
       setShowRegistration(false);
       setShowSuccess(false);
       setIsFlipping(false);
       setCurrentMemberIndex(0);
+      setDuplicateError(null);
     }
 
     return () => {
@@ -184,7 +219,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
     if (!event || !isOpen) return;
     if (event.id === VARIETY_EVENT_ID) {
       setSelectedVarietyTeamSize(null);
-      setVarietyDropdownValue(VARIETY_TEAM_MIN);
+      setVarietyDropdownValue('');
       setMembers([{ fullName: '', college: '', cityState: '', phone: '' }]);
     } else {
       const teamSize = getTeamSize(event);
@@ -202,6 +237,10 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
   }, [event, isOpen]);
 
   const handleMemberFieldChange = (field: keyof RegistrationMember, value: string) => {
+    setDuplicateError(null);
+    if (field === 'phone') {
+      value = value.replace(/\D/g, '').slice(0, 10);
+    }
     setMembers((prev) => {
       const next = [...prev];
       next[currentMemberIndex] = {
@@ -567,23 +606,28 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                   <div className="registration-form-fields">
                     <div className="form-field">
                       <label className="form-label">Total number of participants</label>
-                      <select
-                        className="form-input form-select"
-                        value={varietyDropdownValue}
-                        onChange={(e) => setVarietyDropdownValue(Number(e.target.value))}
-                      >
-                        {VARIETY_TEAM_OPTIONS.map((n) => (
-                          <option key={n} value={n}>
-                            {n} participants
-                          </option>
-                        ))}
-                      </select>
+                      <div className="form-select-wrapper">
+                        <select
+                          className="form-input form-select"
+                          value={varietyDropdownValue}
+                          onChange={(e) => setVarietyDropdownValue(e.target.value === '' ? '' : Number(e.target.value))}
+                        >
+                          <option value="">Select number of participants</option>
+                          {VARIETY_TEAM_OPTIONS.map((n) => (
+                            <option key={n} value={n}>
+                              {n} participants
+                            </option>
+                          ))}
+                        </select>
+                        <span className="form-select-icon material-symbols-outlined">expand_more</span>
+                      </div>
                     </div>
                     <div className="form-submit-wrapper">
                       <button
                         type="button"
                         className="form-submit-btn"
                         onClick={handleVarietyCountContinue}
+                        disabled={varietyDropdownValue === ''}
                       >
                         <span className="form-submit-overlay"></span>
                         <div className="form-submit-content">
@@ -597,6 +641,12 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                   </div>
                 ) : (
                 <form className="registration-form-fields" onSubmit={handleFormSubmit}>
+                  {duplicateError && (
+                    <div className="registration-duplicate-warning">
+                      <span className="material-symbols-outlined">warning</span>
+                      <span>{duplicateError.message}</span>
+                    </div>
+                  )}
                   <div className="form-field">
                     <label className="form-label">Full Name</label>
                     <input 
@@ -636,13 +686,18 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                     <div className="form-field">
                       <label className="form-label">Phone Number</label>
                       <input 
-                        className="form-input" 
-                        placeholder="+91 **********" 
+                        className={`form-input ${duplicateError && duplicateError.duplicatePhones.includes(normalizePhone(members[currentMemberIndex]?.phone || '')) ? 'form-input-error' : ''}`}
+                        placeholder="10 digit mobile number" 
                         required 
                         type="tel"
+                        inputMode="numeric"
+                        maxLength={10}
                         value={members[currentMemberIndex]?.phone || ''}
                         onChange={(e) => handleMemberFieldChange('phone', e.target.value)}
                       />
+                      {duplicateError && duplicateError.duplicatePhones.includes(normalizePhone(members[currentMemberIndex]?.phone || '')) && (
+                        <span className="form-field-error-text">This phone number is already registered for an event</span>
+                      )}
                     </div>
                   </div>
 

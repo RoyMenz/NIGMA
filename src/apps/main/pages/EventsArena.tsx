@@ -6,7 +6,10 @@ import type { EventDetail } from '../data/eventDetails';
 import ConstellationBackground from '../../../shared/components/ConstellationBackground';
 import './EventsArena.css';
 import headerLogo from '../../../assets/images/Header Logo.png';
-
+ import bestmanager from '../../../assets/images/nigma.jpeg';
+ import finance from '../../../assets/images/nigma2.jpeg';
+import coding from '../../../assets/images/coding.jpeg';
+import treasurehunt from '../../../assets/images/treasure.jpeg';
 interface EventCardData {
   id: number;
   title: string;
@@ -19,18 +22,18 @@ interface EventCardData {
 
 const eventsData: EventCardData[] = [
   // Commerce & Management (5)
-  { id: 1, title: 'Best Manager', description: 'Inter-college management challenge.', venue: 'Main Hall', category: 'Commerce', image: '../../../assets/images/bestmanager.jpeg', imageAlt: 'Best Manager' },
+  { id: 1, title: 'Best Manager', description: 'Inter-college management challenge.', venue: 'Main Hall', category: 'Commerce', image: bestmanager, imageAlt: 'Best Manager' },
   { id: 2, title: 'Finance', description: 'Finance case challenge and trading simulations.', venue: 'Finance Lab', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAomt3vUjw5_OtEYxF5V8nKTeIFKaZ6Bb_mvrcrHxic5jLj9l3k_YO_wJmy3-iwcdNwpTo2t5afJPs8PiaheDagAyZw-j_XFCIhixZahN02bRAM2kTsOqo_-5G0VKV7UgriyDiRzRtsTNxWB3lWyQE4wDo4CoUKC8mbV2bFhl1xfzE_WyQNUjTsSUld5ijl4xGqhV0dksbrnyy8Lhkne9GchDMaRXaIVo5iHL_USS6zTr_wYOe22QXWyx_egBDcj39gwwdFUHLbUrQw', imageAlt: 'Finance' },
-  { id: 3, title: 'Marketing', description: 'Marketing strategy and campaign creation.', venue: 'Auditorium', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMzCFszPEnObGGwpkYAgqUi4ieq6psoe-VAzW9gghBHc-SLeiyRzvllcmgBUzsmRIKCFHldNfNzzc8t9S-Ly1inUqQlW9OOk3BIXPQd21f31BdNrgBsd0Oj8roKOf6v5QDy_nKnpqYup-W_RaCcszhGJDWCh_azQaCU65zz9IkEuHeXW8xeHlj9IlT2gkqE1IuOjQU4ksgqj22L-7InjH-5v54syFTaMIOEMt7gkJJRVSMPTQBEfs8sLJ8itMJElXthjrDKM_4kNFh', imageAlt: 'Marketing' },
+  { id: 3, title: 'Marketing', description: 'Marketing strategy and campaign creation.', venue: 'Auditorium', category: 'Commerce', image: finance, imageAlt: 'Marketing' },
   { id: 4, title: 'Human Resource', description: 'HR challenges and role plays.', venue: 'HR Room', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDm3R-_pcS85tICJR-BxsxMAq4f8bYcRxYi9IM54JJ3ZoMZOE94ZALhcL85X3-AgF-UIzH6bEKza9TOZTdbsMDFhoofY0B3pAMOQmESQZtxlIbfHplSFIUQ6l4eJZwxAF_UapM7P1veq2VQMGGYwr2A--xVmQoyIOQp_ELlsmT-T1mEeEfiYLJUnIRax1yc29ezNFo58-qXyUPWkgtDWMeYltXfAM9BRwfjyfQqJxJnma11mxby-AD7xSYocTRQoUNv2vGgMWq41G5Q', imageAlt: 'Human Resource' },
   { id: 5, title: 'Event Management', description: 'Plan and execute a mock event.', venue: 'Event Grounds', category: 'Commerce', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv-UzRPvgrZLlVpWkv2mWwQQzVlZbHCQoWv5PC51Te6XHHDosmvp-ucUrytmon3pFE05AaZQD4AcSoVDC5we1K4R138opMym2ygIK4MhUIT11wBkdyevA6A_VnA7g_MCqj1IXo7KzLwUxlpKKDIv1_X7vlevct3b0sUKOVUM-GLX7qq5stTrhb4FiBcxGDNcZzltIupfeJTeF4BWdWsk_8HUIHcifPdVrjzncaBohB9nsAL0Q6qbWxEq143ZRq77eRULmDWLTJ29NB', imageAlt: 'Event Management' },
 
   // IT & Technical (5)
-  { id: 6, title: 'Coding Challenge', description: 'Problem-solving contest.', venue: 'Computer Lab', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEYHZX0m9wA1uLU8FZHcjgCfIdZE8lyM3OBCJjXBkzPJs6anDBxpJmQwFGlCGDuGZvZ15NDKaAdqHsgcP59cg0dil6rDtlXGJzJiE7XOYu0yY6S1oT0TkrXuPyyYTiRf8rUsOVQIO6SIIQb4KGWaAxCFyY_JCpx0ht17J8BECzPzQv1nGh57vTgvoPmtqR9a9xrIFFAWFoGezI-LFOsxOnSbEtNmr1q6CEVdbWlvUPSgXq9vDqb6iddFb2nawcIfYEDYZfwfd5eg5u=s2400', imageAlt: 'Coding Challenge' },
+  { id: 6, title: 'Coding Challenge', description: 'Problem-solving contest.', venue: 'Computer Lab', category: 'IT', image: coding, imageAlt: 'Coding Challenge' },
   { id: 7, title: 'E-Sports', description: 'Competitive gaming tournament.', venue: 'Gaming Arena', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAomt3vUjw5_OtEYxF5V8nKTeIFKaZ6Bb_mvrcrHxic5jLj9l3k_YO_wJmy3-iwcdNwpTo2t5afJPs8PiaheDagAyZw-j_XFCIhixZahN02bRAM2kTsOqo_-5G0VKV7UgriyDiRzRtsTNxWB3lWyQE4wDo4CoUKC8mbV2bFhl1xfzE_WyQNUjTsSUld5ijl4xGqhV0dksbrnyy8Lhkne9GchDMaRXaIVo5iHL_USS6zTr_wYOe22QXWyx_egBDcj39gwwdFUHLbUrQw', imageAlt: 'E-Sports' },
   { id: 8, title: 'IT Treasure Hunt', description: 'Tech-themed treasure hunt.', venue: 'Campus', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMzCFszPEnObGGwpkYAgqUi4ieq6psoe-VAzW9gghBHc-SLeiyRzvllcmgBUzsmRIKCFHldNfNzzc8t9S-Ly1inUqQlW9OOk3BIXPQd21f31BdNrgBsd0Oj8roKOf6v5QDy_nKnpqYup-W_RaCcszhGJDWCh_azQaCU65zz9IkEuHeXW8xeHlj9IlT2gkqE1IuOjQU4ksgqj22L-7InjH-5v54syFTaMIOEMt7gkJJRVSMPTQBEfs8sLJ8itMJElXthjrDKM_4kNFh', imageAlt: 'IT Treasure Hunt' },
   { id: 9, title: 'Maths Heptathlon', description: 'Seven mathematical challenges.', venue: 'Maths Hall', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv-UzRPvgrZLlVpWkv2mWwQQzVlZbHCQoWv5PC51Te6XHHDosmvp-ucUrytmon3pFE05AaZQD4AcSoVDC5we1K4R138opMym2ygIK4MhUIT11wBkdyevA6A_VnA7g_MCqj1IXo7KzLwUxlpKKDIv1_X7vlevct3b0sUKOVUM-GLX7qq5stTrhb4FiBcxGDNcZzltIupfeJTeF4BWdWsk_8HUIHcifPdVrjzncaBohB9nsAL0Q6qbWxEq143ZRq77eRULmDWLTJ29NB', imageAlt: 'Maths Heptathlon' },
-  { id: 10, title: 'Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAlpOL5H-EQtdnU7JAFVgncgGwi3xC1sq8yQC-5CfNPwUBUmV-4hiOYEQfTFkZOp-0y3IXI-rDVWYR_x7Q_KuGBdhWbDGjFCOn16bdT0_d36sovYliF19nc1wnLGwODR4HbEbn51sLP-6OloWwF4rHQj4qu__Z-jYy7lu5nGBKCEwAADPSyhvEo_Y8WKzzVCD_ZwIcBJnZdFOw5ajRFU3pEdjNPtlW_FS3f1p4ycXS5xP7HWM2c10EQY5qdxLGdvEElHnXH_PrHsDRc', imageAlt: 'Hackathon' },
+  { id: 10, title: 'Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: treasurehunt, imageAlt: 'Hackathon' },
 
   // Variety (5)
   { id: 11, title: 'Variety Event', description: 'Open cultural performances.', venue: 'Stage', category: 'Variety', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv-UzRPvgrZLlVpWkv2mWwQQzVlZbHCQoWv5PC51Te6XHHDosmvp-ucUrytmon3pFE05AaZQD4AcSoVDC5we1K4R138opMym2ygIK4MhUIT11wBkdyevA6A_VnA7g_MCqj1IXo7KzLwUxlpKKDIv1_X7vlevct3b0sUKOVUM-GLX7qq5stTrhb4FiBcxGDNcZzltIupfeJTeF4BWdWsk_8HUIHcifPdVrjzncaBohB9nsAL0Q6qbWxEq143ZRq77eRULmDWLTJ29NB', imageAlt: 'Variety Event' },
