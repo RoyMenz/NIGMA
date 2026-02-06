@@ -40,7 +40,9 @@ const VARIETY_TEAM_OPTIONS = Array.from(
   (_, i) => VARIETY_TEAM_MIN + i
 );
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080';
+const API_BASE =
+  import.meta.env.VITE_API_BASE_URL ??
+  (import.meta.env.DEV ? 'http://localhost:8080' : 'https://backend-9c02.onrender.com');
 
 const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onClose }) => {
   const [showRegistration, setShowRegistration] = React.useState(false);
