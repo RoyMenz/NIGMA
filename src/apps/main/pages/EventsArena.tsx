@@ -185,7 +185,7 @@ const EventsArena: React.FC = () => {
                 onClick={() => handleViewScroll(event.id)}
                 title={event.id === 10 ? 'Registration disabled — Hackathon page coming soon' : 'View details'}
               >
-                <span>{event.id === 10 ? 'View Scroll' : 'View Scroll'}</span>
+                <span>{event.id === 10 ? 'Coming Soon' : 'View Scroll'}</span>
                 <span className="material-symbols-outlined">auto_stories</span>
               </button>
             </div>

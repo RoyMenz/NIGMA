@@ -61,7 +61,7 @@ const HackathonBanner: React.FC = () => {
                 className="group hackathon-cta-btn flex w-full sm:w-auto min-w-0 sm:min-w-[280px] max-w-[320px] sm:max-w-none cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 sm:h-14 md:h-16 px-6 sm:px-8 bg-primary text-background-dark text-sm sm:text-base md:text-lg font-black uppercase tracking-[0.1em] hover:bg-foreground transition-all shadow-xl min-h-[48px] touch-action-manipulation active:scale-95"
               >
                 <span className="flex items-center gap-2 sm:gap-3">
-                  Join the Force!
+                  Coming Soon!
                   <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform text-lg sm:text-xl">
                     arrow_forward
                   </span>
