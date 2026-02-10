@@ -149,7 +149,7 @@ export const eventDetails: EventDetail[] = [
   },
   {
     id: 7,
-    title: 'E-Sports',
+    title: 'E-Sports (BGMI)',
     description: 'Competitive gaming tournament.',
     quote: 'Bring your best team and reflexes to the arena.',
     icon: 'sports_esports',
