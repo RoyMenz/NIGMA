@@ -176,28 +176,18 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
   if (!isOpen) return null;
 
   return (
-    <div
-      className={`modal-overlay hackathon-coming-soon-overlay ${showSuccess ? 'hackathon-success-overlay' : ''}`}
-      onClick={onClose}
-    >
+    <div className="modal-overlay hackathon-coming-soon-overlay" onClick={onClose}>
       <div className="hackathon-modal-constellation">
         <ModalConstellationBackground />
       </div>
       <div
-        className={`hackathon-modal-gradient ${showSuccess ? 'hackathon-success-gradient' : ''}`}
-        style={
-          showSuccess
-            ? undefined
-            : {
-                background:
-                  'linear-gradient(180deg, rgba(11, 28, 45, 0.92) 0%, rgba(79, 163, 209, 0.12) 35%, rgba(201, 162, 77, 0.08) 65%, rgba(11, 28, 45, 0.92) 100%)',
-              }
-        }
+        className="hackathon-modal-gradient"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(11, 28, 45, 0.92) 0%, rgba(79, 163, 209, 0.12) 35%, rgba(201, 162, 77, 0.08) 65%, rgba(11, 28, 45, 0.92) 100%)',
+        }}
       />
-      <div
-        className={`modal-container hackathon-coming-soon-container ${showSuccess ? 'hackathon-success-container' : ''}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="modal-container hackathon-coming-soon-container" onClick={(e) => e.stopPropagation()}>
         <div className="torch-left">
           <div className="torch-pole"></div>
           <span className="material-symbols-outlined torch-flame">local_fire_department</span>
@@ -224,63 +214,34 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
 
           <div className={`golden-scroll hackathon-coming-soon-scroll ${isFlipping ? 'scroll-flipping' : ''}`}>
             {showSuccess ? (
-              <div className="scroll-content hackathon-success-content hackathon-success-blue-gold">
-                <div className="scroll-header">
-                  <div className="scroll-icon-wrapper">
-                    <span className="material-symbols-outlined scroll-icon">check_circle</span>
+              /* Success Screen - Ticket + Back Button */
+              <div className="scroll-content success-screen">
+                <div className="success-card">
+                  <div className="success-card-image">
+                    <div className="success-card-overlay"></div>
                   </div>
-                  <h1 className="scroll-title">Registration Successful!</h1>
-                  <div className="scroll-divider"></div>
+                  <div className="success-card-content">
+                    <p className="success-card-title">Registration Confirmed</p>
+                    <div className="success-card-details">
+                      <div className="success-card-info">
+                        <div className="success-info-item">
+                          <span className="material-symbols-outlined">verified</span>
+                          <p>Your registration has been confirmed. A confirmation email with further details about Round 1 will be sent shortly.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <ul className="scroll-rules-list hackathon-success-list">
-                  <li>
-                    <span className="rule-number">•</span>
-                    <span>To confirm your registration, submit your presentation in PDF format to <a href="mailto:prarthana.23bc062@student.nitte.edu.in" className="hackathon-success-link">prarthana.23bc062@student.nitte.edu.in</a> and <a href="mailto:prarthana.23bc062@student.nitte.edu.in" className="hackathon-success-link">royston.23bc078@student.nitte.edu.in</a></span>
-                  </li>
-                  <li>
-                    <span className="rule-number">•</span>
-                    <span><strong>Submission deadline:</strong> 21-02-2026</span>
-                  </li>
-                  <li>
-                    <span className="rule-number">•</span>
-                    <span>The presentation must include:</span>
-                  </li>
-                  <li className="hackathon-success-sublist">
-                    <span className="rule-number">◦</span>
-                    <span>Title slide (Project Title, Team Name, Team Leader&apos;s Name, Email ID, and Contact Number)</span>
-                  </li>
-                  <li className="hackathon-success-sublist">
-                    <span className="rule-number">◦</span>
-                    <span>Problem statement with the selected track</span>
-                  </li>
-                  <li className="hackathon-success-sublist">
-                    <span className="rule-number">◦</span>
-                    <span>Proposed solution</span>
-                  </li>
-                  <li className="hackathon-success-sublist">
-                    <span className="rule-number">◦</span>
-                    <span>Technology stack and approach</span>
-                  </li>
-                  <li className="hackathon-success-sublist">
-                    <span className="rule-number">◦</span>
-                    <span>(Maximum of 6 slides)</span>
-                  </li>
-                  <li>
-                    <span className="rule-number">•</span>
-                    <span>Results for shortlisted teams will be announced on 23-02-2026 via email or direct contact</span>
-                  </li>
-                  <li>
-                    <span className="rule-number">•</span>
-                    <span><strong>Note:</strong> Failure to submit the presentation within the deadline will result in the registration being considered invalid</span>
-                  </li>
-                  <li>
-                    <span className="rule-number">•</span>
-                    <span>Thank you for registering your team, best of luck!</span>
-                  </li>
-                </ul>
                 <div className="modal-actions">
-                  <button type="button" className="modal-register-btn" onClick={onClose}>
-                    Close
+                  <button 
+                    type="button" 
+                    className="modal-register-btn" 
+                    onClick={() => {
+                      onClose();
+                      window.location.href = '/';
+                    }}
+                  >
+                    Return to Home
                   </button>
                 </div>
               </div>
@@ -572,7 +533,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
           </div>
 
           {!showRegistration && !showSuccess && (
-            <div className="modal-actions">
+            <div className="modal-actions hackathon-modal-actions-sticky">
               <button type="button" className="modal-register-btn" onClick={handleRegisterClick}>
                 Register
               </button>

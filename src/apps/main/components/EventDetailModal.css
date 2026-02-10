@@ -1790,6 +1790,67 @@ body.modal-open {
   z-index: 10;
 }
 
+.hackathon-coming-soon-container .modal-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hackathon-coming-soon-container .hackathon-coming-soon-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Sticky Register button for Hackathon modal */
+.hackathon-modal-actions-sticky {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(11, 28, 45, 0.98) 0%, rgba(11, 28, 45, 0.95) 70%, transparent 100%);
+  padding-top: 0.75rem;
+  padding-bottom: 0.5rem;
+  margin-top: auto;
+  flex-shrink: 0;
+  z-index: 30;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  touch-action: manipulation;
+}
+
+@media (max-width: 639px) {
+  .hackathon-modal-actions-sticky {
+    padding-top: 0.875rem;
+    padding-bottom: 0.625rem;
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+  
+  .hackathon-modal-actions-sticky .modal-register-btn {
+    width: 100%;
+    max-width: 100%;
+    min-height: 48px;
+    font-size: 0.875rem;
+  }
+  
+  .hackathon-modal-actions-sticky .modal-deadline {
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+    text-align: center;
+  }
+}
+
+@media (min-width: 640px) {
+  .hackathon-modal-actions-sticky {
+    padding-top: 1.25rem;
+    padding-bottom: 0.75rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
 /* Registration Successful popup - constellation + blue & gold theme (blue emphasis) */
 .hackathon-success-overlay .hackathon-modal-constellation {
   z-index: 1;
