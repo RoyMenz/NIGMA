@@ -6,14 +6,15 @@ import { eventDetails, getTeamSizeDisplay } from '../data/eventDetails';
 import type { EventDetail } from '../data/eventDetails';
 import ConstellationBackground from '../../../shared/components/ConstellationBackground';
 import HackathonBanner from '../components/sections/HackathonBanner';
+import TechnicalTeam from '../components/sections/TechnicalTeam';
 import './EventsArena.css';
 import headerLogo from '../../../assets/images/Header Logo.png';
- import bestmanager from '../../../assets/images/nigma.jpeg';
 import coding from '../../../assets/images/coding.jpeg';
-import treasurehunt from '../../../assets/images/treasure.jpeg';
+import facepainting from '../../../assets/images/face painting.jpeg';
 import variety from '../../../assets/images/variety.jpeg';
-import bestoutofwaste from '../../../assets/images/bestwaste.jpg';
-import reelmaking from '../../../assets/images/reelmaking.png';
+import bestoutofwaste from '../../../assets/images/bestoutofwaste.jpeg';
+import reelmaking from '../../../assets/images/reelmaking.jpeg';
+import bestmanager from '../../../assets/images/bestmanager.jpeg';
 import hr from '../../../assets/images/hr.jpeg';
 import finance from '../../../assets/images/finance.jpeg';
 import marketing from '../../../assets/images/marketing.jpeg';
@@ -21,6 +22,8 @@ import eventmanagement from '../../../assets/images/eventmgmt.jpeg';
 import ittreasurehunt from '../../../assets/images/ittreasurehunt.jpeg';
 import mockpress from '../../../assets/images/mockpress.jpg';
 import esports from '../../../assets/images/esports.jpeg';
+import maths from '../../../assets/images/math.jpeg';
+import hackathon from '../../../assets/images/hackathon.jpeg';
 interface EventCardData {
   id: number;
   title: string;
@@ -43,15 +46,15 @@ const eventsData: EventCardData[] = [
   { id: 6, title: 'Coding Challenge', description: 'Problem-solving contest.', venue: 'Computer Lab', category: 'IT', image: coding, imageAlt: 'Coding Challenge' },
   { id: 7, title: 'E-Sports', description: 'Competitive gaming tournament.', venue: 'Gaming Arena', category: 'IT', image: esports, imageAlt: 'E-Sports' },
   { id: 8, title: 'IT Treasure Hunt', description: 'Tech-themed treasure hunt.', venue: 'Campus', category: 'IT', image: ittreasurehunt, imageAlt: 'IT Treasure Hunt' },
-  { id: 9, title: 'Maths Heptathlon', description: 'Seven mathematical challenges.', venue: 'Maths Hall', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv-UzRPvgrZLlVpWkv2mWwQQzVlZbHCQoWv5PC51Te6XHHDosmvp-ucUrytmon3pFE05AaZQD4AcSoVDC5we1K4R138opMym2ygIK4MhUIT11wBkdyevA6A_VnA7g_MCqj1IXo7KzLwUxlpKKDIv1_X7vlevct3b0sUKOVUM-GLX7qq5stTrhb4FiBcxGDNcZzltIupfeJTeF4BWdWsk_8HUIHcifPdVrjzncaBohB9nsAL0Q6qbWxEq143ZRq77eRULmDWLTJ29NB', imageAlt: 'Maths Heptathlon' },
-  { id: 10, title: 'Ragnocode Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: treasurehunt, imageAlt: 'Hackathon' },
+  { id: 9, title: 'Maths Heptathlon', description: 'Seven mathematical challenges.', venue: 'Maths Hall', category: 'IT', image: maths, imageAlt: 'Maths Heptathlon' },
+  { id: 10, title: 'Ragnocode Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: hackathon, imageAlt: 'Hackathon' },
 
   // Variety (5)
   { id: 11, title: 'Variety Event', description: 'Open cultural performances.', venue: 'Stage', category: 'Variety', image: variety, imageAlt: 'Variety Event' },
   { id: 12, title: 'Mock Press', description: 'Press and media event simulation.', venue: 'Media Room', category: 'Variety', image: mockpress, imageAlt: 'Mock Press' },
   { id: 13, title: 'Best out of Waste', description: 'Creative reuse competition.', venue: 'Workshop', category: 'Variety', image: bestoutofwaste, imageAlt: 'Best out of Waste' },
   { id: 14, title: 'Reel Making', description: 'Short-form video challenge.', venue: 'Studio', category: 'Variety', image: reelmaking, imageAlt: 'Reel Making' },
-  { id: 15, title: 'Face Painting', description: 'Art and creativity on canvas — your face.', venue: 'Art Zone', category: 'Variety', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMzCFszPEnObGGwpkYAgqUi4ieq6psoe-VAzW9gghBHc-SLeiyRzvllcmgBUzsmRIKCFHldNfNzzc8t9S-Ly1inUqQlW9OOk3BIXPQd21f31BdNrgBsd0Oj8roKOf6v5QDy_nKnpqYup-W_RaCcszhGJDWCh_azQaCU65zz9IkEuHeXW8xeHlj9IlT2gkqE1IuOjQU4ksgqj22L-7InjH-5v54syFTaMIOEMt7gkJJRVSMPTQBEfs8sLJ8itMJElXthjrDKM_4kNFh', imageAlt: 'Face Painting' }
+  { id: 15, title: 'Face Painting', description: 'Art and creativity on canvas — your face.', venue: 'Art Zone', category: 'Variety', image: facepainting, imageAlt: 'Face Painting' }
 ];
 
 const categories = [
@@ -65,6 +68,7 @@ const EventsArena: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedEvent, setSelectedEvent] = useState<EventDetail | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTechTeamOpen, setIsTechTeamOpen] = useState(false);
   const navigate = useNavigate();
   const { open: openHackathonComingSoon } = useHackathonComingSoon();
 
@@ -199,23 +203,15 @@ const EventsArena: React.FC = () => {
 
         {/* Footer */}
         <footer className="arena-footer">
-          {/* <div className="arena-footer-content">
-            <div className="arena-footer-links">
-              <a href="#rules">Book of Rules</a>
-              <span className="arena-footer-divider">•</span>
-              <a href="#conduct">Code of Conduct</a>
-              <span className="arena-footer-divider">•</span>
-              <a href="#privacy">Privacy Rune</a>
-            </div>
-            <div className="arena-footer-social">
-              <div className="arena-social-icon">
-                <span className="material-symbols-outlined">alternate_email</span>
-              </div>
-              <div className="arena-social-icon">
-                <span className="material-symbols-outlined">public</span>
-              </div>
-            </div>
-          </div> */}
+          <div className="arena-footer-content" style={{ justifyContent: 'center', padding: '1rem' }}>
+            <button
+              type="button"
+              onClick={() => setIsTechTeamOpen(true)}
+              className="arena-tech-team-btn"
+            >
+              Technical Team
+            </button>
+          </div>
           <p className="arena-footer-text">N-IGMA © 2026 • Powered by the Forge of Young Minds</p>
         </footer>
       </main>
@@ -226,6 +222,28 @@ const EventsArena: React.FC = () => {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />
+
+      {/* Technical Team Modal */}
+      {isTechTeamOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-background-dark/70 backdrop-blur-sm px-4"
+          onClick={() => setIsTechTeamOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-[2rem] border border-foreground/10 bg-[#0B1C2D]/95 p-4 md:p-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setIsTechTeamOpen(false)}
+              className="tech-team-close-btn absolute right-4 top-4 z-[50] inline-flex items-center justify-center rounded-full border border-white/20 bg-background-dark/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-foreground hover:bg-foreground/10 touch-action-manipulation min-h-[44px] min-w-[44px]"
+            >
+              Close
+            </button>
+            <TechnicalTeam />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

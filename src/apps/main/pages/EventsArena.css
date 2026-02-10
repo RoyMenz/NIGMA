@@ -705,6 +705,42 @@
   }
 }
 
+/* Technical Team Button in Footer */
+.arena-tech-team-btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid #C9A24D;
+  color: #C9A24D;
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 640px) {
+  .arena-tech-team-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+.arena-tech-team-btn:hover {
+  background: #C9A24D;
+  color: #0B1C2D;
+  box-shadow: 0 0 20px rgba(201, 162, 77, 0.4);
+  transform: translateY(-2px);
+}
+
+.arena-tech-team-btn:active {
+  transform: translateY(0);
+}
+
 .arena-footer-links {
   display: flex;
   align-items: center;
