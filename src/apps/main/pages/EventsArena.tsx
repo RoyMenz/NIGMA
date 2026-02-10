@@ -5,6 +5,7 @@ import { useHackathonComingSoon } from '../contexts/HackathonComingSoonContext';
 import { eventDetails, getTeamSizeDisplay } from '../data/eventDetails';
 import type { EventDetail } from '../data/eventDetails';
 import ConstellationBackground from '../../../shared/components/ConstellationBackground';
+import HackathonBanner from '../components/sections/HackathonBanner';
 import './EventsArena.css';
 import headerLogo from '../../../assets/images/Header Logo.png';
  import bestmanager from '../../../assets/images/nigma.jpeg';
@@ -38,7 +39,7 @@ const eventsData: EventCardData[] = [
   { id: 7, title: 'E-Sports', description: 'Competitive gaming tournament.', venue: 'Gaming Arena', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAomt3vUjw5_OtEYxF5V8nKTeIFKaZ6Bb_mvrcrHxic5jLj9l3k_YO_wJmy3-iwcdNwpTo2t5afJPs8PiaheDagAyZw-j_XFCIhixZahN02bRAM2kTsOqo_-5G0VKV7UgriyDiRzRtsTNxWB3lWyQE4wDo4CoUKC8mbV2bFhl1xfzE_WyQNUjTsSUld5ijl4xGqhV0dksbrnyy8Lhkne9GchDMaRXaIVo5iHL_USS6zTr_wYOe22QXWyx_egBDcj39gwwdFUHLbUrQw', imageAlt: 'E-Sports' },
   { id: 8, title: 'IT Treasure Hunt', description: 'Tech-themed treasure hunt.', venue: 'Campus', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBMzCFszPEnObGGwpkYAgqUi4ieq6psoe-VAzW9gghBHc-SLeiyRzvllcmgBUzsmRIKCFHldNfNzzc8t9S-Ly1inUqQlW9OOk3BIXPQd21f31BdNrgBsd0Oj8roKOf6v5QDy_nKnpqYup-W_RaCcszhGJDWCh_azQaCU65zz9IkEuHeXW8xeHlj9IlT2gkqE1IuOjQU4ksgqj22L-7InjH-5v54syFTaMIOEMt7gkJJRVSMPTQBEfs8sLJ8itMJElXthjrDKM_4kNFh', imageAlt: 'IT Treasure Hunt' },
   { id: 9, title: 'Maths Heptathlon', description: 'Seven mathematical challenges.', venue: 'Maths Hall', category: 'IT', image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAv-UzRPvgrZLlVpWkv2mWwQQzVlZbHCQoWv5PC51Te6XHHDosmvp-ucUrytmon3pFE05AaZQD4AcSoVDC5we1K4R138opMym2ygIK4MhUIT11wBkdyevA6A_VnA7g_MCqj1IXo7KzLwUxlpKKDIv1_X7vlevct3b0sUKOVUM-GLX7qq5stTrhb4FiBcxGDNcZzltIupfeJTeF4BWdWsk_8HUIHcifPdVrjzncaBohB9nsAL0Q6qbWxEq143ZRq77eRULmDWLTJ29NB', imageAlt: 'Maths Heptathlon' },
-  { id: 10, title: 'Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: treasurehunt, imageAlt: 'Hackathon' },
+  { id: 10, title: 'Ragnocode Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: treasurehunt, imageAlt: 'Hackathon' },
 
   // Variety (5)
   { id: 11, title: 'Variety Event', description: 'Open cultural performances.', venue: 'Stage', category: 'Variety', image: variety, imageAlt: 'Variety Event' },
@@ -107,9 +108,6 @@ const EventsArena: React.FC = () => {
               className="w-auto object-contain"
             />
           </div>
-          <div className="arena-nav-right">
-            <button className="arena-register-btn" onClick={openHackathonComingSoon}>Hackathon</button>
-          </div>
         </div>
       </header>
 
@@ -139,6 +137,13 @@ const EventsArena: React.FC = () => {
             </button>
           ))}
         </div>
+
+        {/* Hackathon Banner - Only show in All Trials and IT & Technical */}
+        {(activeCategory === 'all' || activeCategory === 'it') && (
+          <div className="arena-hackathon-banner">
+            <HackathonBanner />
+          </div>
+        )}
 
         {/* Events Grid */}
         <div className="arena-events-grid">
@@ -180,7 +185,7 @@ const EventsArena: React.FC = () => {
                 onClick={() => handleViewScroll(event.id)}
                 title={event.id === 10 ? 'Registration disabled — Hackathon page coming soon' : 'View details'}
               >
-                <span>{event.id === 10 ? 'Coming soon' : 'View Scroll'}</span>
+                <span>{event.id === 10 ? 'View Scroll' : 'View Scroll'}</span>
                 <span className="material-symbols-outlined">auto_stories</span>
               </button>
             </div>

@@ -350,6 +350,26 @@
   }
 }
 
+/* Hackathon Banner Wrapper */
+.arena-hackathon-banner {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .arena-hackathon-banner {
+    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .arena-hackathon-banner {
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+  }
+}
+
 .arena-category-btn {
   display: flex;
   align-items: center;
