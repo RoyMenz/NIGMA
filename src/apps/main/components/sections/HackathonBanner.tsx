@@ -33,8 +33,7 @@ const HackathonBanner: React.FC = () => {
                <span className="text-primary">Ragnocode</span>
               </h1>
               <h2 className="text-foreground/80 text-sm sm:text-base md:text-lg lg:text-xl font-medium leading-relaxed px-2 sm:px-4">
-                20 Hours of Immortal Creation. Forge your legacy in code. Assemble your pantheon of
-                builders.
+              A 20-hour high-intensity hackathon focused on innovation, collaboration, and execution.
               </h2>
             </div>
 

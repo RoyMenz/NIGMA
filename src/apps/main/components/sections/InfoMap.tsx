@@ -12,8 +12,8 @@ const InfoMap: React.FC = () => {
             <h2 className="text-foreground text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-tight">The Citadel</h2>
           </div>
           <p className="text-[#bab09c] text-base sm:text-lg leading-relaxed">
-            Nestled in the heart of the tech valley, our campus transforms into the legendary realm
-            of Olympus for Ragnarok. Join thousands of innovators at our sacred grounds.
+          Dr. Nitte Shankara Adyanthaya Memorial First Grade College was established in 1988 by the Nitte Education Trust. <br />
+          Dr. N.S.A.M. First Grade College has been a constituent college of Nitte (Deemed to be University), Mangalore, since June 2022. 
           </p>
 
           <div className="space-y-4 sm:space-y-6 mt-2 sm:mt-4">
