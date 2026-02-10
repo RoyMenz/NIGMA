@@ -226,7 +226,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                       <div className="success-card-info">
                         <div className="success-info-item">
                           <span className="material-symbols-outlined">verified</span>
-                          <p>Your registration has been confirmed. A confirmation email with further details about Round 1 will be sent shortly.</p>
+                          <p>Your registration has been confirmed. <br /> <b>A confirmation email with further details about Round 1 will be sent shortly.</b></p>
                         </div>
                       </div>
                     </div>
@@ -282,19 +282,27 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                   <ul className="scroll-rules-list">
                     <li>
                       <span className="rule-number">01.</span>
-                      <span>Teams must submit their idea presentation (PPT) based on one of the four provided tracks.</span>
+                      <span>Teams must submit their idea presentation (PPT) based on one of the four provided tracks. (Education, Healthcare, Fintech, Open Innovation)</span>
                     </li>
                     <li>
                       <span className="rule-number">02.</span>
-                      <span>The presentation should clearly outline the problem statement, proposed solution, and implementation plan.</span>
+                      <span>Email your presentation (PDF format) to prarthana.23bc062@student.nitte.edu.in by 21-02-2026 to confirm registration</span>
                     </li>
                     <li>
                       <span className="rule-number">03.</span>
-                      <span>Submissions will be evaluated based on innovation, feasibility, and impact potential.</span>
+                      <span>Presentation must include: Title slide, problem statement (with track), proposed solution, and tech stack & approach (max 6 slides)</span>
                     </li>
                     <li>
                       <span className="rule-number">04.</span>
-                      <span>Top 15 teams will be shortlisted for the onsite final round based on evaluation scores.</span>
+                      <span>Submissions will be evaluated based on innovation, feasibility, and impact potential.</span>
+                    </li>
+                    <li>
+                      <span className="rule-number">05.</span>
+                      <span>SResults for shortlisted teams will be announced on 23-02-2026 via email or direct contact.</span>
+                    </li>
+                    <li>
+                      <span className="rule-number">06.</span>
+                      <span>Failure to submit the presentation within the deadline will result in the registration being considered invalid.</span>
                     </li>
                   </ul>
                 </div>
@@ -338,9 +346,9 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                   <div className="registration-icon-wrapper">
                     <span className="material-symbols-outlined registration-icon">groups</span>
                   </div>
-                  <h1 className="registration-title">Hackathon — Team Size</h1>
+                  <h1 className="registration-title">Team Details</h1>
                   <p className="registration-subtitle">
-                    Select your team size (2 to 4 members). First member will be the Team Leader.
+                    Select your team size (2 to 4 members). <br /> <b><u>First member will be the Team Leader.</u></b>
                   </p>
                   <div className="registration-divider"></div>
                 </div>
