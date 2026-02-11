@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import EventDetailModal from '../components/EventDetailModal';
-import { useHackathonComingSoon } from '../contexts/HackathonComingSoonContext';
+import { useHackathon } from '../contexts/HackathonContext';
 import { eventDetails, getTeamSizeDisplay } from '../data/eventDetails';
 import type { EventDetail } from '../data/eventDetails';
 import ConstellationBackground from '../../../shared/components/ConstellationBackground';
@@ -70,11 +70,11 @@ const EventsArena: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isTechTeamOpen, setIsTechTeamOpen] = useState(false);
   const navigate = useNavigate();
-  const { open: openHackathonComingSoon } = useHackathonComingSoon();
+  const { open: openHackathon } = useHackathon();
 
   const handleViewScroll = (eventId: number) => {
     if (eventId === 10) {
-      openHackathonComingSoon();
+      openHackathon();
       return;
     }
     const event = eventDetails.find(e => e.id === eventId);
@@ -192,9 +192,9 @@ const EventsArena: React.FC = () => {
               <button 
                 className="arena-card-btn"
                 onClick={() => handleViewScroll(event.id)}
-                title={event.id === 10 ? 'Registration disabled — Hackathon page coming soon' : 'View details'}
+                title={event.id === 10 ? 'View hackathon details and register' : 'View details'}
               >
-                <span>{event.id === 10 ? 'Coming Soon' : 'View Scroll'}</span>
+                <span>{event.id === 10 ? 'View Scroll' : 'View Scroll'}</span>
                 <span className="material-symbols-outlined">auto_stories</span>
               </button>
             </div>

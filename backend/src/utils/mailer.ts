@@ -75,10 +75,10 @@ export async function sendHackathonEmail(
       <p><strong>1. Title Slide</strong><br/>
       Project Title, Team Name, Team Leader’s Name, Email ID, Contact Number</p>
 
-      <p><strong>2. Problem Statement</strong></p>
-
-      <p><strong>3. Proposed Solution</strong><br/>
+      <p><strong>2. Problem Statement</strong><br/>
       (Based on selected track)</p>
+
+      <p><strong>3. Proposed Solution</strong></p>
 
       <p><strong>4. Technology Stack & Approach</strong></p>
 

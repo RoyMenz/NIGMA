@@ -1730,15 +1730,15 @@ body.modal-open {
   }
 }
 
-/* Hackathon Coming Soon Modal - constellation + blue-gold gradient */
-.hackathon-coming-soon-overlay {
+/* Hackathon Modal - constellation + blue-gold gradient */
+.hackathon-modal-overlay {
   background-color: rgba(11, 28, 45, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
 }
 
 @media (max-width: 639px) {
-  .hackathon-coming-soon-overlay {
+  .hackathon-modal-overlay {
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
   }
@@ -1765,7 +1765,7 @@ body.modal-open {
   pointer-events: none;
 }
 
-.hackathon-coming-soon-scroll {
+.hackathon-modal-scroll {
   position: relative;
   overflow: hidden;
 }
@@ -1786,11 +1786,11 @@ body.modal-open {
   white-space: nowrap;
 }
 
-.hackathon-coming-soon-container {
+.hackathon-modal-container {
   z-index: 10;
 }
 
-.hackathon-coming-soon-container .modal-content-wrapper {
+.hackathon-modal-container .modal-content-wrapper {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
@@ -1798,7 +1798,7 @@ body.modal-open {
   -webkit-overflow-scrolling: touch;
 }
 
-.hackathon-coming-soon-container .hackathon-coming-soon-scroll {
+.hackathon-modal-container .hackathon-modal-scroll {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -1956,23 +1956,23 @@ body.modal-open {
   box-shadow: 0 0 16px rgba(201, 162, 77, 0.4);
 }
 
-.hackathon-coming-soon-quote {
+.hackathon-modal-quote {
   margin-top: 1rem;
   margin-bottom: 0;
 }
 
-.hackathon-coming-soon-quote p {
+.hackathon-modal-quote p {
   font-size: 0.875rem;
   line-height: 1.7;
   margin-bottom: 0.75rem;
 }
 
-.hackathon-coming-soon-quote p:last-child {
+.hackathon-modal-quote p:last-child {
   margin-bottom: 0;
 }
 
 @media (min-width: 640px) {
-  .hackathon-coming-soon-quote p {
+  .hackathon-modal-quote p {
     font-size: 1rem;
   }
 }

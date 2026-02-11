@@ -1,10 +1,10 @@
 import React from 'react';
 import './Header.css';
 import headerLogo from '../../../../assets/images/Header Logo.png';
-import { useHackathonComingSoon } from '../../contexts/HackathonComingSoonContext';
+import { useHackathon } from '../../contexts/HackathonContext';
 
 const Header: React.FC = () => {
-  const { open: openHackathonComingSoon } = useHackathonComingSoon();
+  const { open: openHackathon } = useHackathon();
 
   return (
     <header className="landing-header landing-header--top">
@@ -16,8 +16,8 @@ const Header: React.FC = () => {
           />
         </div>
         <div className="landing-nav-right">
-          <button className="landing-hackathon-btn" onClick={openHackathonComingSoon}>
-            Coming Soon
+          <button className="landing-hackathon-btn" onClick={openHackathon}>
+            RagnoCode
           </button>
         </div>
       </div>
