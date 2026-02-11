@@ -3,7 +3,7 @@ import './EventDetailModal.css';
 import ModalConstellationBackground from './ModalConstellationBackground';
 import { eventDetails } from '../data/eventDetails';
 
-interface HackathonComingSoonModalProps {
+interface HackathonModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
@@ -28,7 +28,9 @@ function isValidEmail(email: string): boolean {
 const HACKATHON_TEAM_OPTIONS = [2, 3, 4] as const;
 const HACKATHON_TRACKS = ['Education', 'Healthcare', 'Fintech', 'Open Innovation'] as const;
 
-const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isOpen, onClose }) => {
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend-9c02.onrender.com';
+
+const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   const [showRegistration, setShowRegistration] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
@@ -41,6 +43,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
   ]);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const hackathonEvent = eventDetails.find((e) => e.id === HACKATHON_EVENT_ID);
   const rules = hackathonEvent?.rules ?? [];
@@ -86,9 +89,10 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
     setEmailError(null);
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setEmailError(null);
+    setSubmitError(null);
     const current = members[currentMemberIndex];
     const email = (current?.email ?? '').trim();
     if (!isValidEmail(email)) {
@@ -102,7 +106,36 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
       return;
     }
 
-    // Frontend-only: no API call. Show success (coming soon) message.
+    // Build payload and fire request in background (don't wait for response)
+    const trackValue = selectedTrack.toLowerCase();
+    const membersPayload = members.map((m) => {
+      const parts = m.cityState.split(',').map((s) => s.trim());
+      const city = parts[0] || m.cityState.trim();
+      const state = parts[1] || city;
+      return {
+        fullName: m.fullName.trim(),
+        college: m.college.trim(),
+        city,
+        state,
+        phone: m.phone.trim(),
+        email: m.email.trim(),
+      };
+    });
+
+    const payload = {
+      teamName: teamName.trim(),
+      teamSize: effectiveTeamSize,
+      track: trackValue,
+      members: membersPayload,
+    };
+
+    fetch(`${API_BASE}/api/hackathon`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(() => {}); // Fire and forget; backend works in background
+
+    // Show success immediately
     setIsFlipping(true);
     setTimeout(() => {
       setShowRegistration(false);
@@ -165,6 +198,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
       setMembers([{ fullName: '', college: '', cityState: '', phone: '', email: '' }]);
       setCurrentMemberIndex(0);
       setEmailError(null);
+      setSubmitError(null);
     }
   }, [isOpen]);
 
@@ -176,7 +210,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay hackathon-coming-soon-overlay" onClick={onClose}>
+    <div className="modal-overlay hackathon-modal-overlay" onClick={onClose}>
       <div className="hackathon-modal-constellation">
         <ModalConstellationBackground />
       </div>
@@ -187,7 +221,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
             'linear-gradient(180deg, rgba(11, 28, 45, 0.92) 0%, rgba(79, 163, 209, 0.12) 35%, rgba(201, 162, 77, 0.08) 65%, rgba(11, 28, 45, 0.92) 100%)',
         }}
       />
-      <div className="modal-container hackathon-coming-soon-container" onClick={(e) => e.stopPropagation()}>
+      <div className="modal-container hackathon-modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="torch-left">
           <div className="torch-pole"></div>
           <span className="material-symbols-outlined torch-flame">local_fire_department</span>
@@ -212,7 +246,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
             </div>
           )}
 
-          <div className={`golden-scroll hackathon-coming-soon-scroll ${isFlipping ? 'scroll-flipping' : ''}`}>
+          <div className={`golden-scroll hackathon-modal-scroll ${isFlipping ? 'scroll-flipping' : ''}`}>
             {showSuccess ? (
               /* Success Screen - Ticket + Back Button */
               <div className="scroll-content success-screen">
@@ -246,7 +280,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                 </div>
               </div>
             ) : !showRegistration ? (
-              <div className="scroll-content hackathon-coming-soon-content">
+              <div className="scroll-content hackathon-modal-content">
                 <div className="scroll-header">
                   <div className="scroll-icon-wrapper">
                     <span className="material-symbols-outlined scroll-icon">{icon}</span>
@@ -255,7 +289,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                   <div className="scroll-divider"></div>
                 </div>
 
-                <div className="scroll-quote hackathon-coming-soon-quote">
+                <div className="scroll-quote hackathon-modal-quote">
                   <p>&quot;{quote}&quot;</p>
                 </div>
 
@@ -277,7 +311,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                 <div className="scroll-section">
                   <div className="scroll-section-header">
                     <span className="material-symbols-outlined">rule</span>
-                    <h2>Rules for Selection Round</h2>
+                    <h2>Rules for First Round</h2>
                   </div>
                   <ul className="scroll-rules-list">
                     <li>
@@ -286,11 +320,11 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                     </li>
                     <li>
                       <span className="rule-number">02.</span>
-                      <span>Email your presentation (PDF format) to prarthana.23bc062@student.nitte.edu.in by 21-02-2026 to confirm registration</span>
+                      <span>Email your presentation (PDF format) to prarthana.23bc063@student.nitte.edu.in and royston.23bc078@student.nitte.edu.in by 21-02-2026 to confirm registration</span>
                     </li>
                     <li>
                       <span className="rule-number">03.</span>
-                      <span>Presentation must include: Title slide, problem statement (with track), proposed solution, and tech stack & approach (max 6 slides)</span>
+                      <span>Presentation must include: Title slide, problem statement (with track), proposed solution, tech stack & approach (max 6 slides exclusing title slide)</span>
                     </li>
                     <li>
                       <span className="rule-number">04.</span>
@@ -298,7 +332,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                     </li>
                     <li>
                       <span className="rule-number">05.</span>
-                      <span>SResults for shortlisted teams will be announced on 23-02-2026 via email or direct contact.</span>
+                      <span>Results for shortlisted teams will be announced on 23-02-2026 via email or direct contact.</span>
                     </li>
                     <li>
                       <span className="rule-number">06.</span>
@@ -348,7 +382,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                   </div>
                   <h1 className="registration-title">Team Details</h1>
                   <p className="registration-subtitle">
-                    Select your team size (2 to 4 members). <br /> <b><u>First member will be the Team Leader.</u></b>
+                    Enter your team details below. <br /> <b><u>First member will be the Team Leader.</u></b>
                   </p>
                   <div className="registration-divider"></div>
                 </div>
@@ -506,6 +540,9 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                       <span className="form-field-error-text">{emailError}</span>
                     )}
                   </div>
+                  {submitError && (
+                    <div className="form-field-error-text mb-4">{submitError}</div>
+                  )}
                   <div className="hackathon-form-actions">
                     {currentMemberIndex > 0 ? (
                       <button
@@ -522,7 +559,10 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
                     ) : (
                       <div className="hackathon-form-actions-spacer" aria-hidden />
                     )}
-                    <button className="form-submit-btn hackathon-form-actions-submit" type="submit">
+                    <button
+                      className="form-submit-btn hackathon-form-actions-submit"
+                      type="submit"
+                    >
                       <span className="form-submit-overlay"></span>
                       <div className="form-submit-content">
                         {currentMemberIndex >= effectiveTeamSize - 1
@@ -545,7 +585,7 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
               <button type="button" className="modal-register-btn" onClick={handleRegisterClick}>
                 Register
               </button>
-              <p className="modal-deadline">Hackathon registrations will open soon. Express your interest below.</p>
+              <p className="modal-deadline">Register your team for the hackathon below.</p>
             </div>
           )}
         </div>
@@ -554,4 +594,4 @@ const HackathonComingSoonModal: React.FC<HackathonComingSoonModalProps> = ({ isO
   );
 };
 
-export default HackathonComingSoonModal;
+export default HackathonModal;
