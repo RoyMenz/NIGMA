@@ -86,15 +86,17 @@ hackathonRouter.post('/', async (req, res, next) => {
     }
 
     // 3️⃣ Send confirmation email
-    try {
-      await sendHackathonEmail(
-        members[0].email,
-        teamName,
-        registration.registration_id
-      );
-    } catch (emailErr) {
-      console.error('Email sending failed:', emailErr);
-    }
+    // 3️⃣ Send confirmation email
+// 3️⃣ Send confirmation email (non-blocking)
+sendHackathonEmail(
+  members[0].email,
+  teamName,
+  registration.registration_id
+).catch((emailErr) => {
+  console.error('Email sending failed:', emailErr);
+});
+
+
 
     return res.status(201).json({
       data: {

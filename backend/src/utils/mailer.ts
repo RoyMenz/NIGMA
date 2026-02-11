@@ -1,16 +1,9 @@
+import { Resend } from 'resend';
+import fs from 'fs';
 import path from 'path';
-import nodemailer from 'nodemailer';
 import { env } from '../env.js';
 
-export const transporter = nodemailer.createTransport({
-  host: env.SMTP_HOST,
-  port: env.SMTP_PORT,
-  secure: true,
-  auth: {
-    user: env.SMTP_USER,
-    pass: env.SMTP_PASS,
-  },
-});
+const resend = new Resend(env.RESEND_API_KEY);
 
 export async function sendHackathonEmail(
   to: string,
@@ -24,7 +17,13 @@ export async function sendHackathonEmail(
     'RagnoCode_ppt_template.pptx'
   );
 
-  const htmlContent = `
+  const fileBuffer = fs.readFileSync(templatePath);
+
+  await resend.emails.send({
+    from: 'RagnoCode 2026 <developers@nigmafest.in>',
+    to,
+    subject: 'RagnoCode 2026 – Round 1 Submission Guidelines',
+    html: `
     <div style="font-family: Arial, sans-serif; line-height: 1.7; color: #222;">
       
       <h2>RagnoCode 2026 – Round 1 Submission Guidelines</h2>
@@ -75,10 +74,10 @@ export async function sendHackathonEmail(
       <p><strong>1. Title Slide</strong><br/>
       Project Title, Team Name, Team Leader’s Name, Email ID, Contact Number</p>
 
-      <p><strong>2. Problem Statement</strong></p>
-
-      <p><strong>3. Proposed Solution</strong><br/>
+      <p><strong>2. Problem Statement</strong><br/>
       (Based on selected track)</p>
+
+      <p><strong>3. Proposed Solution</strong></p>
 
       <p><strong>4. Technology Stack & Approach</strong></p>
 
@@ -118,19 +117,11 @@ export async function sendHackathonEmail(
         RagnoCode 2026
       </p>
     </div>
-  `;
-
-  await transporter.sendMail({
-    from: `"RagnoCode 2026" <developers@nigmafest.in>`,
-    to,
-    subject: "RagnoCode 2026 – Round 1 Submission Guidelines",
-    html: htmlContent,
+  `,
     attachments: [
       {
         filename: 'RagnoCode_PPT_Template.pptx',
-        path: templatePath,
-        contentType:
-          'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        content: fileBuffer,
       },
     ],
   });
