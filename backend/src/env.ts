@@ -11,6 +11,11 @@ const EnvSchema = z.object({
   // Supabase Data API via PostgREST.
   SUPABASE_URL: z.string().url(),
   SUPABASE_KEY: z.string().min(1),
+  
+  SMTP_HOST: z.string().min(1),
+  SMTP_PORT: z.coerce.number().int().positive(),
+  SMTP_USER: z.string().email(),
+  SMTP_PASS: z.string().min(1),
 });
 
 export type Env = z.infer<typeof EnvSchema>;

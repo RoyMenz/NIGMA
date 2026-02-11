@@ -8,6 +8,8 @@ import { eventsRouter } from './routes/events.js';
 import { registrationsRouter } from './routes/registrations.js';
 import { notFound } from './middleware/notFound.js';
 import { errorHandler } from './middleware/errorHandler.js';
+import { hackathonRouter } from './routes/hackathon.js';
+
 
 export function createApp() {
   const app = express();
@@ -52,6 +54,8 @@ export function createApp() {
 
   app.use('/api/events', eventsRouter);
   app.use('/api/registrations', registrationsRouter);
+  app.use('/api/hackathon', hackathonRouter);
+
 
   app.use(notFound);
   app.use(errorHandler);
