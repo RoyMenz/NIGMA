@@ -28,7 +28,7 @@ function isValidEmail(email: string): boolean {
 const HACKATHON_TEAM_OPTIONS = [2, 3, 4] as const;
 const HACKATHON_TRACKS = ['Education', 'Healthcare', 'Fintech', 'Open Innovation'] as const;
 
-const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8080';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend-9c02.onrender.com';
 
 const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   const [showRegistration, setShowRegistration] = useState(false);
@@ -327,7 +327,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                 <div className="scroll-section">
                   <div className="scroll-section-header">
                     <span className="material-symbols-outlined">rule</span>
-                    <h2>Rules for Selection Round</h2>
+                    <h2>Rules for First Round</h2>
                   </div>
                   <ul className="scroll-rules-list">
                     <li>
@@ -398,7 +398,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                   </div>
                   <h1 className="registration-title">Team Details</h1>
                   <p className="registration-subtitle">
-                    Select your team size (2 to 4 members). <br /> <b><u>First member will be the Team Leader.</u></b>
+                    Enter your team details below. <br /> <b><u>First member will be the Team Leader.</u></b>
                   </p>
                   <div className="registration-divider"></div>
                 </div>
