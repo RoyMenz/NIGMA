@@ -43,7 +43,6 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   ]);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
   const [emailError, setEmailError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const hackathonEvent = eventDetails.find((e) => e.id === HACKATHON_EVENT_ID);
@@ -107,56 +106,42 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       return;
     }
 
-    // Submit to backend
-    setIsSubmitting(true);
-    try {
-      const trackValue = selectedTrack.toLowerCase();
-      const membersPayload = members.map((m) => {
-        const parts = m.cityState.split(',').map((s) => s.trim());
-        const city = parts[0] || m.cityState.trim();
-        const state = parts[1] || city;
-        return {
-          fullName: m.fullName.trim(),
-          college: m.college.trim(),
-          city,
-          state,
-          phone: m.phone.trim(),
-          email: m.email.trim(),
-        };
-      });
-
-      const payload = {
-        teamName: teamName.trim(),
-        teamSize: effectiveTeamSize,
-        track: trackValue,
-        members: membersPayload,
+    // Build payload and fire request in background (don't wait for response)
+    const trackValue = selectedTrack.toLowerCase();
+    const membersPayload = members.map((m) => {
+      const parts = m.cityState.split(',').map((s) => s.trim());
+      const city = parts[0] || m.cityState.trim();
+      const state = parts[1] || city;
+      return {
+        fullName: m.fullName.trim(),
+        college: m.college.trim(),
+        city,
+        state,
+        phone: m.phone.trim(),
+        email: m.email.trim(),
       };
+    });
 
-      const res = await fetch(`${API_BASE}/api/hackathon`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
+    const payload = {
+      teamName: teamName.trim(),
+      teamSize: effectiveTeamSize,
+      track: trackValue,
+      members: membersPayload,
+    };
 
-      const data = (await res.json().catch(() => ({}))) as { error?: { message?: string }; data?: unknown };
+    fetch(`${API_BASE}/api/hackathon`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).catch(() => {}); // Fire and forget; backend works in background
 
-      if (!res.ok) {
-        const msg = data?.error?.message ?? `Registration failed (${res.status})`;
-        setSubmitError(msg);
-        return;
-      }
-
-      setIsFlipping(true);
-      setTimeout(() => {
-        setShowRegistration(false);
-        setShowSuccess(true);
-        setIsFlipping(false);
-      }, 300);
-    } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Network error. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Show success immediately
+    setIsFlipping(true);
+    setTimeout(() => {
+      setShowRegistration(false);
+      setShowSuccess(true);
+      setIsFlipping(false);
+    }, 300);
   };
 
   const handlePreviousMember = () => {
@@ -214,7 +199,6 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       setCurrentMemberIndex(0);
       setEmailError(null);
       setSubmitError(null);
-      setIsSubmitting(false);
     }
   }, [isOpen]);
 
@@ -578,15 +562,12 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                     <button
                       className="form-submit-btn hackathon-form-actions-submit"
                       type="submit"
-                      disabled={isSubmitting}
                     >
                       <span className="form-submit-overlay"></span>
                       <div className="form-submit-content">
-                        {isSubmitting
-                          ? 'Submitting...'
-                          : currentMemberIndex >= effectiveTeamSize - 1
-                            ? 'Submit'
-                            : 'Next Member'}
+                        {currentMemberIndex >= effectiveTeamSize - 1
+                          ? 'Submit'
+                          : 'Next Member'}
                         <span className="material-symbols-outlined">arrow_forward</span>
                       </div>
                     </button>
