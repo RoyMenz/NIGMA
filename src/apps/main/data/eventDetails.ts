@@ -293,7 +293,7 @@ export const eventDetails: EventDetail[] = [
       'Each team must consist of 2 members.',
       'Time limit: 2 hours.',
       'There will be only one round.',
-      'Participants must bring their own waste materials (maximum 5 items can be used).',
+      'Participants are required to bring their own waste materials and may use a maximum of five different items to create one final product.',
       'Only used/waste materials are allowed; no new or decorative items.',
       'Basic stationery is allowed and not counted as waste.',
       'Only hot glue gun is permitted; no other electrical items allowed.',
