@@ -330,7 +330,7 @@ export const eventDetails: EventDetail[] = [
     rules: [
       'Entry Fees : ₹ 150 per team(On-site payment).',
       'Each team must have two participants: one painter and one model.',
-      'The time limit is 60 minutes.',
+      'The time limit is 90 minutes.',
       'Participants must report 15 minutes before the event starts.',
       'The theme will be announced 30 minutes before the event and must be followed.',
       'Only skin-safe face paints and brushes are allowed.',

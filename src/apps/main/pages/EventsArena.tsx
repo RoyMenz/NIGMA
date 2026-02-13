@@ -44,7 +44,7 @@ const eventsData: EventCardData[] = [
 
   // IT & Technical (5)
   { id: 6, title: 'Coding Challenge', description: 'Problem-solving contest.', venue: 'Computer Lab', category: 'IT', image: coding, imageAlt: 'Coding Challenge' },
-  { id: 7, title: 'E-Sports', description: 'Competitive gaming tournament.', venue: 'Gaming Arena', category: 'IT', image: esports, imageAlt: 'E-Sports' },
+  { id: 7, title: 'E-Sports (BGMI)', description: 'Competitive gaming tournament.', venue: 'Gaming Arena', category: 'IT', image: esports, imageAlt: 'E-Sports' },
   { id: 8, title: 'IT Treasure Hunt', description: 'Tech-themed treasure hunt.', venue: 'Campus', category: 'IT', image: ittreasurehunt, imageAlt: 'IT Treasure Hunt' },
   { id: 9, title: 'Maths Heptathlon', description: 'Seven mathematical challenges.', venue: 'Maths Hall', category: 'IT', image: maths, imageAlt: 'Maths Heptathlon' },
   { id: 10, title: 'Ragnocode Hackathon', description: 'Build solutions in a sprint.', venue: 'Hack Lab', category: 'IT', image: hackathon, imageAlt: 'Hackathon' },
