@@ -34,6 +34,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   const [showRegistration, setShowRegistration] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [teamSizeDropdown, setTeamSizeDropdown] = useState<2 | 3 | 4 | ''>('');
   const [selectedTeamSize, setSelectedTeamSize] = useState<2 | 3 | 4 | null>(null);
   const [selectedTrack, setSelectedTrack] = useState<string>('');
@@ -53,6 +54,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   const effectiveTeamSize = selectedTeamSize ?? 0;
 
   const handleRegisterClick = () => {
+    if (isSubmitting) return;
     setIsFlipping(true);
     setTimeout(() => {
       setShowRegistration(true);
@@ -61,6 +63,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   };
 
   const handleBackToDetails = useCallback(() => {
+    if (isSubmitting) return;
     setSelectedTeamSize(null);
     setTeamSizeDropdown('');
     setSelectedTrack('');
@@ -70,7 +73,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       setShowRegistration(false);
       setIsFlipping(false);
     }, 300);
-  }, []);
+  }, [isSubmitting]);
 
   const handleTeamSizeContinue = () => {
     if (teamSizeDropdown === '' || !HACKATHON_TEAM_OPTIONS.includes(teamSizeDropdown)) return;
@@ -91,6 +94,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     setEmailError(null);
     setSubmitError(null);
     const current = members[currentMemberIndex];
@@ -129,28 +133,48 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       members: membersPayload,
     };
 
-    fetch(`${API_BASE}/api/hackathon`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    }).catch(() => {}); // Fire and forget; backend works in background
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(`${API_BASE}/api/hackathon`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-    // Show success immediately
-    setIsFlipping(true);
-    setTimeout(() => {
-      setShowRegistration(false);
-      setShowSuccess(true);
-      setIsFlipping(false);
-    }, 300);
+      if (!response.ok) {
+        const errorBody = await response.json().catch(() => null);
+        throw new Error(
+          errorBody?.error?.message ??
+            `Registration failed with status ${response.status}`,
+        );
+      }
+
+      setIsFlipping(true);
+      setTimeout(() => {
+        setShowRegistration(false);
+        setShowSuccess(true);
+        setIsFlipping(false);
+      }, 300);
+    } catch (err) {
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to submit registration. Please try again.',
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handlePreviousMember = () => {
+    if (isSubmitting) return;
     if (currentMemberIndex <= 0) return;
     setEmailError(null);
     setCurrentMemberIndex((prev) => prev - 1);
   };
 
   const handleMemberFieldChange = (field: keyof RegistrationMember, value: string) => {
+    setSubmitError(null);
     if (field === 'phone') {
       value = value.replace(/\D/g, '').slice(0, 10);
     }
@@ -169,7 +193,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       document.body.classList.add('modal-open');
       document.body.style.overflow = 'hidden';
       const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
+        if (e.key === 'Escape' && !isSubmitting) {
           if (showSuccess) onClose();
           else if (showRegistration) handleBackToDetails();
           else onClose();
@@ -183,7 +207,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       };
     }
     document.body.style.overflow = 'unset';
-  }, [isOpen, onClose, showRegistration, showSuccess, handleBackToDetails]);
+  }, [isOpen, onClose, showRegistration, showSuccess, handleBackToDetails, isSubmitting]);
 
   // Reset state when modal closes
   useEffect(() => {
@@ -199,6 +223,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
       setCurrentMemberIndex(0);
       setEmailError(null);
       setSubmitError(null);
+      setIsSubmitting(false);
     }
   }, [isOpen]);
 
@@ -210,7 +235,12 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="modal-overlay hackathon-modal-overlay" onClick={onClose}>
+    <div
+      className="modal-overlay hackathon-modal-overlay"
+      onClick={() => {
+        if (!isSubmitting) onClose();
+      }}
+    >
       <div className="hackathon-modal-constellation">
         <ModalConstellationBackground />
       </div>
@@ -221,6 +251,15 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
             'linear-gradient(180deg, rgba(11, 28, 45, 0.92) 0%, rgba(79, 163, 209, 0.12) 35%, rgba(201, 162, 77, 0.08) 65%, rgba(11, 28, 45, 0.92) 100%)',
         }}
       />
+      {isSubmitting && (
+        <div className="registration-loading-overlay" onClick={(e) => e.stopPropagation()}>
+          <div className="registration-loading-content">
+            <div className="registration-loading-spinner"></div>
+            <p className="registration-loading-text">Submitting...</p>
+            <p className="registration-loading-subtext">Please wait while we register your team</p>
+          </div>
+        </div>
+      )}
       <div className="modal-container hackathon-modal-container" onClick={(e) => e.stopPropagation()}>
         <div className="torch-left">
           <div className="torch-pole"></div>
@@ -239,6 +278,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
               <button
                 className="modal-back-btn"
                 onClick={showRegistration ? handleBackToDetails : onClose}
+                disabled={isSubmitting}
               >
                 <span className="material-symbols-outlined">arrow_back</span>
                 <span>{showRegistration ? 'Return to Rules' : 'Back to Arena'}</span>
@@ -443,7 +483,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                       type="button"
                       className="form-submit-btn"
                       onClick={handleTeamSizeContinue}
-                      disabled={teamSizeDropdown === '' || selectedTrack === '' || teamName.trim() === ''}
+                      disabled={isSubmitting || teamSizeDropdown === '' || selectedTrack === '' || teamName.trim() === ''}
                     >
                       <span className="form-submit-overlay"></span>
                       <div className="form-submit-content">
@@ -549,6 +589,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                         type="button"
                         className="form-submit-btn form-submit-btn-secondary"
                         onClick={handlePreviousMember}
+                        disabled={isSubmitting}
                       >
                         <span className="form-submit-overlay"></span>
                         <div className="form-submit-content">
@@ -562,6 +603,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                     <button
                       className="form-submit-btn hackathon-form-actions-submit"
                       type="submit"
+                      disabled={isSubmitting}
                     >
                       <span className="form-submit-overlay"></span>
                       <div className="form-submit-content">
