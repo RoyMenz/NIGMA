@@ -1,0 +1,88 @@
+/* Dedicated stylesheet so maintenance mode is reversible and doesn't affect the normal site. */
+
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Be+Vietnam+Pro:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap");
+
+.nigma-maintenance-root {
+  /* match the sample HTML's dark mode behavior */
+  color-scheme: dark;
+}
+
+.nigma-maintenance-root :root {
+  --primary-gold: #f4af25;
+  --deep-charcoal: #0f0f0f;
+}
+
+.nigma-maintenance-root .marble-bg {
+  position: relative;
+  background-color: var(--deep-charcoal);
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(244, 175, 37, 0.05) 0%, transparent 70%),
+    url("../assets/images/hackathon.jpeg");
+  background-blend-mode: overlay;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* More reliable on mobile (address bar / safe areas) than 100vh. */
+  min-height: 100svh;
+}
+
+.nigma-maintenance-root .marble-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Darken + blur the background only, keeping foreground crisp. */
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.nigma-maintenance-root .floating-particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--primary-gold);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+.nigma-maintenance-root .mythic-icon {
+  filter: drop-shadow(0 0 25px rgba(244, 175, 37, 0.4));
+}
+
+.nigma-maintenance-root .text-glow {
+  text-shadow: 0 0 20px rgba(244, 175, 37, 0.3);
+}
+
+.nigma-maintenance-root .laurel-wreath {
+  opacity: 0.08;
+  pointer-events: none;
+  position: absolute;
+}
+
+@media (max-width: 640px) {
+  /* iOS Safari struggles with fixed backgrounds; this avoids scroll jank. */
+  .nigma-maintenance-root .marble-bg {
+    background-attachment: scroll;
+  }
+
+  /* Reduce visual clutter and keep the message centered on small screens. */
+  .nigma-maintenance-root .laurel-wreath {
+    opacity: 0.05;
+  }
+
+  .nigma-maintenance-root .floating-particle {
+    opacity: 0.18;
+  }
+}
+
+/* Ensure fonts match sample page even if the main app uses different font variables */
+.nigma-maintenance-root .font-serif {
+  font-family: "Cinzel", serif;
+}
+
+.nigma-maintenance-root .font-sans {
+  font-family: "Be Vietnam Pro", sans-serif;
+}

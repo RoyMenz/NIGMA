@@ -2,155 +2,111 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Ragnarok Tech Maintenance - The Forge</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&amp;family=Be+Vietnam+Pro:wght@300;400;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#FFD700",
-                        "gold-glow": "#FFD700",
-                        "bronze": "#CD7F32",
-                        "background-light": "#f5f6f8",
-                        "background-dark": "#0A0A0A",
-                    },
-                    fontFamily: {
-                        "display": ["Newsreader", "serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.5rem",
-                        "lg": "1rem",
-                        "xl": "1.5rem",
-                        "full": "9999px"
-                    },
-                },
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#f4af25",
+                "charcoal": "#0f0f0f",
+                "marble-dark": "#181611",
+                "gold-muted": "#a68a56",
+              },
+              fontFamily: {
+                "serif": ["Cinzel", "serif"],
+                "sans": ["Be+Vietnam+Pro", "sans-serif"]
+              },
             },
+          },
         }
     </script>
 <style type="text/tailwindcss">
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        :root {
+            --primary-gold: #f4af25;
+            --deep-charcoal: #0f0f0f;
         }
-        .stormy-bg {
-            background: radial-gradient(circle at center, #1a150a 0%, #050505 100%);
-            position: relative;
-            overflow: hidden;
+        .marble-bg {
+            background-color: var(--deep-charcoal);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(244, 175, 37, 0.05) 0%, transparent 70%),
+                url("https://lh3.googleusercontent.com/aida-public/AB6AXuDFvgrrRcpNO_6hA3ziEdhZ1d-rMhvek4Em-fDcTcj1qqdplt7CyABO9iXQQspG6IC9VYGOpDCYQZhSMl2jNx6ooXQw5eLfD7zpqQ5bubcYdBq7OkGRBkKh0qJCi-FDeZB8IqNyCqgLATUzdaotJpau0QkAfZkjhsOiHYqGJadM7w6cwwrZrbk4zNC_op3Tfl4a8qtYCKQNUfywVMr9gNohKfaWGxb-tYFuPcsSGol1X-fTd6o7Grp7ubkYjdceJpyoeL7ChWwol1oy");
+            background-blend-mode: overlay;
+            background-attachment: fixed;
         }
-        .lightning-bolt {
-            filter: drop-shadow(0 0 15px #FFD700) drop-shadow(0 0 40px #FFD700);
-        }
-        .spark {
+        .floating-particle {
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #ffd700;
+            background: var(--primary-gold);
             border-radius: 50%;
-            filter: blur(1px);
+            opacity: 0.3;
         }
-        .glass-card {
-            background: rgba(20, 18, 12, 0.7);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 215, 0, 0.15);
+        .mythic-icon {
+            filter: drop-shadow(0 0 25px rgba(244, 175, 37, 0.4));
         }
-        .glow-text {
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(205, 127, 50, 0.3);
+        .text-glow {
+            text-shadow: 0 0 20px rgba(244, 175, 37, 0.3);
         }
-        .golden-button {
-            background: linear-gradient(135deg, #FFD700 0%, #B8860B 100%);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
-        }
-        .golden-button:hover {
-            box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
+        .laurel-wreath {
+            opacity: 0.08;
+            pointer-events: none;
+            position: absolute;
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display">
-<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden stormy-bg">
-<div class="layout-container flex h-full grow flex-col">
-<div class="md:px-40 flex flex-1 justify-center py-5">
-<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#3a2e15] px-10 py-3 z-20">
-<div class="flex items-center gap-4 text-white">
-<div class="size-6 text-primary">
-<span class="material-symbols-outlined text-3xl">bolt</span>
+<body class="marble-bg font-sans text-white min-h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 pointer-events-none">
+<div class="floating-particle top-[10%] left-[20%]"></div>
+<div class="floating-particle top-[30%] left-[80%]"></div>
+<div class="floating-particle top-[70%] left-[15%]"></div>
+<div class="floating-particle top-[85%] left-[60%]"></div>
+<div class="floating-particle top-[40%] left-[40%]"></div>
+<div class="floating-particle top-[60%] left-[90%]"></div>
 </div>
-<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] uppercase">Ragnarok Tech Fest</h2>
+<div class="laurel-wreath top-10 left-10 transform -rotate-12">
+<span class="material-symbols-outlined !text-[250px] text-primary">military_tech</span>
 </div>
-<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#1a150a] border border-[#FFD700]/30 text-primary gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-4 hover:bg-[#2a2210] transition-colors">
-<span class="material-symbols-outlined text-[20px] fill-current">stars</span>
-<span>VALHALLA PASS</span>
-</button>
-</header>
-<main class="flex-1 flex flex-col items-center justify-center relative py-12 px-4">
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
-<div class="lightning-bolt mb-20 scale-125">
-<svg fill="none" height="400" viewBox="0 0 100 200" width="200" xmlns="http://www.w3.org/2000/svg">
-<path d="M60 0L20 90H50L10 200L90 70H50L60 0Z" fill="#FFD700"></path>
-</svg>
+<div class="laurel-wreath bottom-10 right-10 transform rotate-12">
+<span class="material-symbols-outlined !text-[250px] text-primary">military_tech</span>
 </div>
-<div class="spark top-1/4 left-1/3"></div>
-<div class="spark top-2/3 right-1/4"></div>
-<div class="spark bottom-1/4 left-1/2" style="background: #CD7F32;"></div>
-<div class="spark top-1/3 right-1/2" style="background: #FFF;"></div>
-</div>
-<div class="glass-card rounded-xl p-8 max-w-lg w-full z-10 shadow-2xl border-t-2 border-primary/40">
-<h1 class="text-primary tracking-[0.1em] text-[32px] md:text-[40px] font-bold leading-tight text-center pb-2 pt-4 glow-text uppercase">
-                                Registration Victorious
-                            </h1>
-<p class="text-[#d4af37]/70 text-lg font-normal leading-normal pb-8 pt-1 text-center italic">
-                                Your name has been etched in gold into the halls of Valhalla.
-                            </p>
-<div class="mb-8">
-<div class="flex flex-col items-stretch justify-start rounded-xl overflow-hidden shadow-[0_0_20px_rgba(218,165,32,0.2)] bg-[#1a150a]/90 border border-primary/10">
-<div class="w-full bg-center bg-no-repeat aspect-video bg-cover" data-alt="Epic glowing mythical code terminal with runes" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgzIm6e_x8GeVX5YJfb8xwHLwzNldUCUWaqFRgExn1S0nn_QukYhyAmqjVVPl8dGS9cBB3Tq7ur-bqrtWeW1zQAb8YP3xuFAOqAeMsuMMxXNSZCEWdE2bNhzz6kXCoLmGpupWAYSI4vFKXAHKi-1ybSQxbeFw8ohXFBf8O4FzAnQ09FzyXJd9toMFDtucRRdSnYyhJAjnIY2Y9ANG3CfzC3XK8JbS29X9lfOQtcUdTiJ4j86615FV3N5NVl5euHEDhciJaIkFaoHxZ");'>
-<div class="w-full h-full bg-gradient-to-t from-[#1a150a] to-transparent"></div>
-</div>
-<div class="flex w-full min-w-72 grow flex-col items-stretch justify-center gap-1 py-6 px-6">
-<p class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">The Code of Odin</p>
-<div class="flex flex-col sm:flex-row items-start sm:items-end gap-3 justify-between mt-2">
-<div class="flex flex-col gap-1">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-sm">verified</span>
-<p class="text-[#bba370] text-base font-normal leading-normal">Status: Confirmed</p>
-</div>
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-bronze text-sm">military_tech</span>
-<p class="text-[#bba370] text-base font-normal leading-normal">Warrior ID: RAG-ODIN-2024</p>
-</div>
-</div>
-<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary/10 border border-primary/40 text-primary text-sm font-bold leading-normal hover:bg-primary/20 transition-all">
-<span class="truncate">VIEW TICKET</span>
-</button>
+<main class="relative z-10 flex flex-col items-center justify-center text-center p-6 max-w-4xl">
+<div class="mb-12 mythic-icon">
+<div class="relative inline-block">
+<span class="material-symbols-outlined !text-[120px] md:text-[160px] text-primary">construction</span>
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<span class="material-symbols-outlined !text-[60px] text-black">auto_awesome</span>
 </div>
 </div>
 </div>
+<div class="flex flex-col gap-4 mb-8">
+<h1 class="font-serif text-4xl md:text-7xl font-black tracking-widest text-white leading-none">
+                THE <span class="text-primary text-glow">FORGE</span> IS IN 
+            </h1>
+<h1 class="font-serif text-4xl md:text-7xl font-black tracking-widest text-white leading-none">
+                MAINTENANCE
+            </h1>
 </div>
-<div class="flex justify-center mt-4">
-<button class="group flex min-w-[240px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-8 golden-button text-black gap-3 text-lg font-black leading-normal tracking-[0.05em] transition-all transform hover:-translate-y-1">
-<span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">swords</span>
-<span class="truncate uppercase">Return to Arena</span>
-</button>
+<div class="flex items-center justify-center gap-4 mb-8 w-full">
+<div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-primary/40 to-primary/60"></div>
+<span class="material-symbols-outlined text-primary text-2xl">hardware</span>
+<div class="h-[1px] flex-1 bg-gradient-to-l from-transparent via-primary/40 to-primary/60"></div>
 </div>
+<div class="flex flex-col items-center gap-2">
+<p class="text-gold-muted text-lg md:text-2xl font-light uppercase tracking-[0.4em]">
+                Please visit us again at <span class="text-primary font-bold">7 PM IST</span>
+</p>
+<div class="mt-8">
+<p class="text-white/30 text-[10px] uppercase font-bold tracking-[0.3em] italic">
+                    The Gods are currently refining the digital realm.
+                </p>
 </div>
-<div class="mt-12 opacity-40 flex gap-8">
-<span class="material-symbols-outlined text-primary/40 text-4xl">temple_hindu</span>
-<span class="material-symbols-outlined text-primary/40 text-4xl">mountain_flag</span>
-<span class="material-symbols-outlined text-primary/40 text-4xl">auto_awesome</span>
 </div>
 </main>
-</div>
-</div>
-</div>
-<div class="absolute inset-0 pointer-events-none opacity-30">
-<div class="absolute top-10 left-10 w-1.5 h-1.5 bg-yellow-300 rounded-full animate-pulse shadow-[0_0_8px_#ffd700]"></div>
-<div class="absolute top-40 right-20 w-1 h-1 bg-white rounded-full animate-pulse shadow-[0_0_5px_#fff]"></div>
-<div class="absolute bottom-20 left-1/4 w-1 h-1 bg-yellow-500 rounded-full animate-pulse shadow-[0_0_8px_#daa520]"></div>
-<div class="absolute top-1/2 right-1/3 w-1.5 h-1.5 bg-yellow-200 rounded-full animate-pulse shadow-[0_0_10px_#fff]"></div>
-<div class="absolute bottom-1/3 right-1/4 w-1 h-1 bg-primary rounded-full animate-pulse"></div>
-</div>
-</div>
+<div class="fixed inset-0 pointer-events-none opacity-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFvgrrRcpNO_6hA3ziEdhZ1d-rMhvek4Em-fDcTcj1qqdplt7CyABO9iXQQspG6IC9VYGOpDCYQZhSMl2jNx6ooXQw5eLfD7zpqQ5bubcYdBq7OkGRBkKh0qJCi-FDeZB8IqNyCqgLATUzdaotJpau0QkAfZkjhsOiHYqGJadM7w6cwwrZrbk4zNC_op3Tfl4a8qtYCKQNUfywVMr9gNohKfaWGxb-tYFuPcsSGol1X-fTd6o7Grp7ubkYjdceJpyoeL7ChWwol1oy');"></div>
 
 </body></html>
