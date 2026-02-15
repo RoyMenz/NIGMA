@@ -17,7 +17,7 @@ const Header: React.FC = () => {
         </div>
         <div className="landing-nav-right">
           <button className="landing-hackathon-btn" onClick={openHackathon}>
-            RagnoCode
+            Hackathon
           </button>
         </div>
       </div>
