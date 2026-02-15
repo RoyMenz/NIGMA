@@ -1925,6 +1925,61 @@ body.modal-open {
   color: #d4af5a;
 }
 
+/* Registration Failed popup */
+.registration-error-popup-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(11, 28, 45, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.registration-error-popup {
+  width: min(520px, 92vw);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(circle at top, rgba(239, 68, 68, 0.18), rgba(11, 28, 45, 0.96) 55%);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.55);
+  padding: 1.25rem 1.25rem 1.1rem;
+  text-align: center;
+}
+
+.registration-error-popup-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 0.75rem;
+}
+
+.registration-error-popup-title {
+  margin: 0 0 0.5rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.registration-error-popup-message {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.45;
+}
+
+.registration-error-popup-actions {
+  display: flex;
+  justify-content: center;
+}
+
 .hackathon-success-blue-gold .hackathon-success-link {
   color: #d4af5a;
   text-decoration: underline;

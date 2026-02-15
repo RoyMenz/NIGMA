@@ -44,12 +44,21 @@ function normalizePhone(phone: string): string {
   return phone.replace(/\D/g, '');
 }
 
+function normalizeIndianMobile10(phone: string): string {
+  const digits = normalizePhone(phone);
+  // Frontend input is strictly 10 digits; when backend returns "+91xxxxxxxxxx" or "91xxxxxxxxxx",
+  // compare against the last 10 digits.
+  return digits.length >= 10 ? digits.slice(-10) : digits;
+}
+
 // Production backend URL. For local dev, set VITE_API_BASE_URL=http://localhost:8080 in .env
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://backend-9c02.onrender.com';
 
 const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onClose }) => {
   const [showRegistration, setShowRegistration] = React.useState(false);
   const [showSuccess, setShowSuccess] = React.useState(false);
+  const [showSubmitError, setShowSubmitError] = React.useState(false);
+  const [submitErrorMessage, setSubmitErrorMessage] = React.useState<string>('');
   const [isFlipping, setIsFlipping] = React.useState(false);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [members, setMembers] = React.useState<RegistrationMember[]>([
@@ -74,6 +83,8 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
   const time = useRef(0);
 
   const handleRegisterClick = () => {
+    setShowSubmitError(false);
+    setSubmitErrorMessage('');
     setIsFlipping(true);
     setTimeout(() => {
       setShowRegistration(true);
@@ -82,6 +93,8 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
   };
 
   const handleBackToDetails = () => {
+    setShowSubmitError(false);
+    setSubmitErrorMessage('');
     if (event?.id === VARIETY_EVENT_ID) {
       setSelectedVarietyTeamSize(null);
       setVarietyDropdownValue('');
@@ -121,14 +134,6 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
 
     if (!event) return;
 
-    // Block submit if any phone is not exactly 10 digits (field restricts to 10, so this catches incomplete)
-    const phonesToValidate = members.slice(0, Math.max(1, effectiveTeamSize));
-    const invalidPhoneIndex = phonesToValidate.findIndex((m) => normalizePhone(m.phone || '').length !== 10);
-    if (invalidPhoneIndex >= 0) {
-      setCurrentMemberIndex(invalidPhoneIndex);
-      return;
-    }
-
     setIsSubmitting(true);
     try {
       const response = await fetch(`${API_BASE}/api/registrations`, {
@@ -145,7 +150,13 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
         if (response.status === 409 && errorBody?.error) {
           const details = errorBody.error.details as Array<{ phone: string }> | undefined;
           const duplicatePhones = Array.isArray(details)
-            ? details.map((d) => String(d?.phone ?? '')).filter(Boolean)
+            ? details
+                .map((d) =>
+                  normalizeIndianMobile10(
+                    String((d as any)?.phone ?? (d as any)?.phone_number ?? (d as any)?.phoneNumber ?? ''),
+                  ),
+                )
+                .filter(Boolean)
             : [];
           setDuplicateError({
             message: errorBody.error.message ?? 'One or more members are already registered for an event',
@@ -153,20 +164,19 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
           });
           // Switch to first member with duplicate phone so user sees the highlighted field
           const firstDuplicateIndex = members.findIndex((m) =>
-            duplicatePhones.includes(normalizePhone(m.phone || ''))
+            duplicatePhones.includes(normalizeIndianMobile10(m.phone || ''))
           );
           if (firstDuplicateIndex >= 0) {
             setCurrentMemberIndex(firstDuplicateIndex);
           }
           return;
         }
-        throw new Error(
-          errorBody?.error?.message ??
-            `Registration failed with status ${response.status}`,
-        );
+        throw new Error(errorBody?.error?.message ?? `Registration failed with status ${response.status}`);
       }
 
       setDuplicateError(null);
+      setShowSubmitError(false);
+      setSubmitErrorMessage('');
 
       // Backend success — transition to success screen
       setIsFlipping(true);
@@ -177,6 +187,10 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
       }, 300);
     } catch (err) {
       setDuplicateError(null);
+      setSubmitErrorMessage(
+        err instanceof Error ? err.message : 'Unable to submit registration. Please try again.',
+      );
+      setShowSubmitError(true);
       // eslint-disable-next-line no-console
       console.error(err);
     } finally {
@@ -204,6 +218,8 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
       document.body.style.overflow = 'unset';
       setShowRegistration(false);
       setShowSuccess(false);
+      setShowSubmitError(false);
+      setSubmitErrorMessage('');
       setIsFlipping(false);
       setCurrentMemberIndex(0);
       setDuplicateError(null);
@@ -223,7 +239,9 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
       setMembers([{ fullName: '', college: '', cityState: '', phone: '' }]);
     } else {
       const teamSize = getTeamSize(event);
-      const effectiveSize = Math.max(1, Math.min(teamSize, 3));
+      // Initialize exactly to the event's required team size.
+      // Keep a reasonable cap to avoid accidental huge allocations if event data is wrong.
+      const effectiveSize = Math.max(1, Math.min(teamSize, 25));
       setMembers(
         Array.from({ length: effectiveSize }, () => ({
           fullName: '',
@@ -567,6 +585,38 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
             ) : (
               /* Registration Form */
               <div className="scroll-content registration-form">
+                {showSubmitError && (
+                  <div className="registration-error-popup-overlay" role="dialog" aria-modal="true">
+                    <div className="registration-error-popup" role="document">
+                      <div className="registration-error-popup-icon">
+                        <span className="material-symbols-outlined">error</span>
+                      </div>
+                      <h2 className="registration-error-popup-title">Registration failed</h2>
+                      <p className="registration-error-popup-message">
+                        {submitErrorMessage || 'Unable to submit registration. Please try again.'}
+                      </p>
+                      <div className="registration-error-popup-actions">
+                        <button
+                          type="button"
+                          className="form-submit-btn"
+                          onClick={() => {
+                            setShowSubmitError(false);
+                            setSubmitErrorMessage('');
+                            setShowRegistration(true);
+                            setShowSuccess(false);
+                          }}
+                        >
+                          <span className="form-submit-overlay"></span>
+                          <div className="form-submit-content">
+                            <span className="material-symbols-outlined">refresh</span>
+                            Try again
+                            <span className="material-symbols-outlined">refresh</span>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
                 {isVarietyEvent && selectedVarietyTeamSize === null ? (
                   /* Variety Event: choose total participants first */
                   <div className="registration-header">
@@ -682,16 +732,18 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, isOpen, onCl
                     <div className="form-field">
                       <label className="form-label">Phone Number</label>
                       <input 
-                        className={`form-input ${duplicateError && duplicateError.duplicatePhones.includes(normalizePhone(members[currentMemberIndex]?.phone || '')) ? 'form-input-error' : ''}`}
+                        className={`form-input ${duplicateError && duplicateError.duplicatePhones.includes(normalizeIndianMobile10(members[currentMemberIndex]?.phone || '')) ? 'form-input-error' : ''}`}
                         placeholder="10 digit mobile number" 
                         required 
                         type="tel"
                         inputMode="numeric"
+                        minLength={10}
                         maxLength={10}
+                        pattern="[0-9]{10}"
                         value={members[currentMemberIndex]?.phone || ''}
                         onChange={(e) => handleMemberFieldChange('phone', e.target.value)}
                       />
-                      {duplicateError && duplicateError.duplicatePhones.includes(normalizePhone(members[currentMemberIndex]?.phone || '')) && (
+                      {duplicateError && duplicateError.duplicatePhones.includes(normalizeIndianMobile10(members[currentMemberIndex]?.phone || '')) && (
                         <span className="form-field-error-text">This phone number is already registered for an event</span>
                       )}
                     </div>

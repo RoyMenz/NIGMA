@@ -25,6 +25,10 @@ function isValidEmail(email: string): boolean {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(trimmed);
 }
+
+function normalizePhone(phone: string): string {
+  return phone.replace(/\D/g, '');
+}
 const HACKATHON_TEAM_OPTIONS = [2, 3, 4] as const;
 const HACKATHON_TRACKS = ['Education', 'Healthcare', 'Fintech', 'Open Innovation'] as const;
 
@@ -43,6 +47,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
     { fullName: '', college: '', cityState: '', phone: '', email: '' },
   ]);
   const [currentMemberIndex, setCurrentMemberIndex] = useState(0);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
@@ -95,9 +100,15 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
+    setPhoneError(null);
     setEmailError(null);
     setSubmitError(null);
     const current = members[currentMemberIndex];
+    const phoneDigits = normalizePhone(current?.phone ?? '');
+    if (phoneDigits.length !== 10) {
+      setPhoneError('Please enter a valid 10 digit Indian mobile number.');
+      return;
+    }
     const email = (current?.email ?? '').trim();
     if (!isValidEmail(email)) {
       setEmailError('Please enter a valid email address.');
@@ -121,7 +132,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
         college: m.college.trim(),
         city,
         state,
-        phone: m.phone.trim(),
+        phone: normalizePhone(m.phone),
         email: m.email.trim(),
       };
     });
@@ -170,13 +181,15 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
     if (isSubmitting) return;
     if (currentMemberIndex <= 0) return;
     setEmailError(null);
+    setPhoneError(null);
     setCurrentMemberIndex((prev) => prev - 1);
   };
 
   const handleMemberFieldChange = (field: keyof RegistrationMember, value: string) => {
     setSubmitError(null);
     if (field === 'phone') {
-      value = value.replace(/\D/g, '').slice(0, 10);
+      setPhoneError(null);
+      value = normalizePhone(value).slice(0, 10);
     }
     setMembers((prev) => {
       const next = [...prev];
@@ -230,6 +243,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
   // Clear email error when switching member or changing email
   useEffect(() => {
     setEmailError(null);
+    setPhoneError(null);
   }, [currentMemberIndex]);
 
   if (!isOpen) return null;
@@ -552,15 +566,20 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                     <div className="form-field">
                       <label className="form-label">Phone Number</label>
                       <input
-                        className="form-input"
+                        className={`form-input ${phoneError ? 'form-input-error' : ''}`}
                         placeholder="10 digit mobile number"
                         required
                         type="tel"
                         inputMode="numeric"
+                        minLength={10}
                         maxLength={10}
+                        pattern="[0-9]{10}"
                         value={members[currentMemberIndex]?.phone ?? ''}
                         onChange={(e) => handleMemberFieldChange('phone', e.target.value)}
                       />
+                      {phoneError && (
+                        <span className="form-field-error-text">{phoneError}</span>
+                      )}
                     </div>
                   </div>
                   <div className="form-field">
