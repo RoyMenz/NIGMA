@@ -119,6 +119,20 @@
     background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuAnyfJ0-OuARqcMSmWSVC8h5DPiu0E8haJp-tDWznousZcjnCnjRmsNsgMGATSSTvopKQLK5pLUMbPBWdWh367Wee6uDB2Gz28lrgSbOhf4BdiTFpiRU31aGc0xi4qq2pPCIhZJ2csCpKtdl8hxUdKoo2aCFOnBDsh1nwnXJjpZ0s8oKibZSP2RbLvZuOUsFOD1-82K2SeA2_Zrxfs2o4FaeQSOCIGO3cQuKK5_z473HV8nviDaxYqIBD6MLouP8OfplfiwLkI_BL5u);
   }
 
+  /* Marquee banner: two copies, so translate by -50% for seamless loop */
+  .animate-marquee-banner {
+    animation: marquee-banner 25s linear infinite;
+  }
+
+  @keyframes marquee-banner {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
   .marquee {
     display: flex;
     overflow: hidden;

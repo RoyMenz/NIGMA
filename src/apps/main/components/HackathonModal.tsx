@@ -374,7 +374,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                     </li>
                     <li>
                       <span className="rule-number">02.</span>
-                      <span>Email your presentation (PDF format) to prarthana.23bc063@student.nitte.edu.in and royston.23bc078@student.nitte.edu.in by 21-02-2026 to confirm registration</span>
+                      <span>Email your presentation (PDF format) to prarthana.23bc063@student.nitte.edu.in and royston.23bc078@student.nitte.edu.in by 23-02-2026 4:00 PM to confirm registration</span>
                     </li>
                     <li>
                       <span className="rule-number">03.</span>
@@ -386,7 +386,7 @@ const HackathonModal: React.FC<HackathonModalProps> = ({ isOpen, onClose }) => {
                     </li>
                     <li>
                       <span className="rule-number">05.</span>
-                      <span>Results for shortlisted teams will be announced on 23-02-2026 via email or direct contact.</span>
+                      <span>Results for shortlisted teams will be announced on 23-02-2026 6:00 PM via email or direct contact.</span>
                     </li>
                     <li>
                       <span className="rule-number">06.</span>
