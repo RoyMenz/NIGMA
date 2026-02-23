@@ -1,6 +1,6 @@
 import React from 'react';
 
-const BANNER_TEXT = 'Deadline Extended! Submit Your Hackathon PPTs by 23th February 2026, 4:00 PM';
+const BANNER_TEXT = 'Final Call for Registrations!!';
 
 const MarqueeBanner: React.FC = () => {
   const items = Array(6).fill(BANNER_TEXT);
