@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import MainApp from './apps/main/App';
 import HackathonApp from './apps/hackathon/App';
-import MarqueeBanner from './shared/components/MarqueeBanner';
+// import MarqueeBanner from './shared/components/MarqueeBanner';
 
 function App() {
   const [subdomain, setSubdomain] = useState<string>('');
@@ -44,7 +44,7 @@ function App() {
   // Route to appropriate app based on subdomain
   return (
     <>
-      <MarqueeBanner />
+      {/* Keep<MarqueeBanner /> */}
       {subdomain === 'hackathon' ? <HackathonApp /> : <MainApp />}
     </>
   );
